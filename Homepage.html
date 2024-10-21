@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="Homepage.css">
+</head>
+<body>
+
+    <div class="header">
+        <div class="menu" onclick="toggleMenu()">☰</div> <!-- Hamburger menu -->
+        <div class="logo">
+            <img src="savvy-saver-logo.png" alt="Savvy Saver Logo">
+            <div class="slogan">Minimize waste, Maximize taste!</div>
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <button onclick="location.href='dashboard.html'">Dashboard</button>
+        <button onclick="location.href='daily-tips.html'">Daily Tips</button>
+        <button onclick="location.href='logout.html'">Logout</button>
+        <button onclick="location.href='recipe-recommendations.html'">Recipe Recommendations</button>
+        <button onclick="location.href='settings.html'">Settings</button>
+        <button onclick="location.href='feedback.html'">Feedback</button>
+        <button class="close-btn" onclick="toggleMenu()">×</button> <!-- Close button -->
+    </div>
+
+    <div class="parallax" id="daily-tips">
+        <div class="content-box daily-tips-bg">
+            <h2>Daily Tips</h2>
+            <p>Stay informed and inspired with our Daily Tips! This feature offers a curated collection of food conservation strategies and healthy lifestyle advice delivered right to you. Enjoy helpful pop-up messages that encourage you to make the most of your ingredients while embracing nutritious choices. Each tip is designed to enhance your culinary skills and promote sustainability.</p>
+        </div>
+    </div>
+
+    <div class="parallax" id="recipe-recommendations">
+        <div class="content-box recipe-bg">
+            <h2>Recipe Recommendations</h2>
+            <p>Looking for new culinary inspirations? Our Recipe Recommendation feature introduces you to a world of healthy, diverse meal ideas tailored to your preferences. Discover exciting recipes that not only tantalize your taste buds but also align with your dietary goals. With Savvy Saver, exploring new flavors has never been easier!</p>
+        </div>
+    </div>
+
+    <div class="parallax" id="dashboard">
+        <div class="content-box dashboard-bg">
+            <h2>Dashboard</h2>
+            <p>Dive into our Dashboard, where you can effortlessly manage your food inventory. Here, you’ll find a comprehensive overview of all your logged food items, complete with images, dates of storage, expiration dates, and your preferred fridge duration. Easily keep track of when to consume your items with detailed insights and quick access to more information. Plus, our user-friendly form allows you to add new items swiftly, ensuring your inventory is always up-to-date.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-buttons">
+            <button onclick="location.href='feedback.html'">Feedback</button>
+            <button onclick="location.href='settings.html'">Settings</button>
+            <button onclick="location.href='logout.html'">Logout</button>
+        </div>
+    </div>
+
+    <script src="Homepage.js"></script>
+</body>
+</html>
