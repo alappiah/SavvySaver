@@ -1,317 +1,149 @@
+/* style.css */
+
+/* Global styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Global Styles */
-*, ::after, ::before {
+/* Header styles */
+header {
+    background-color: #00008B;
+    padding: 20px;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav ul {
+    list-style: none;
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Add box-sizing */
-}
-
-/* Body Styles */
-body {
-    font-family: Lato, Georgia;
-    background-color: #f5f5f5; /* Example background, adjust as necessary */
-}
-
-/* Header Styles */
-.header {
     display: flex;
-    justify-content: space-between;
+}
+
+header nav li {
+    margin-right: 20px;
+}
+
+header nav a {
+    text-decoration:solid;
+    color: #000000;
+}
+
+header .search-bar {
+    display: flex;
     align-items: center;
-    background-color: #004080; /* Dark Blue */
-    color: white;
-    padding: 20px;
-    position: relative;
-}
-
-/* Sidebar Styles */
-.sidebar {
-    position: fixed;
-    left: -400px; /* Hide off-screen */
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #0080ff;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    transition: left 0.3s ease;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-
-/* Content Box Styles */
-.content-box {
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    max-width: 800px; /* Optional: limit the width */
-    text-align: left; /* Align text to the left for better readability */
-    height: 300px;
-}
-
-/* Section Titles */
-.section-title {
-    color: #004080; /* Dark blue for headings */
-    font-size: 36px; /* Adjust size as needed */
-    margin: 20px 0; /* Space above and below the title */
-    text-align: center; /* Center the title */
-}
-
-/* Footer Styles */
-.footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #004080; /* Dark Blue */
-}
-
-/* Button Styles */
-.footer-buttons button {
-    margin: 0 10px;
-    padding: 10px 15px;
-    border: none;
+    border: 1px solid #cccccc;
     border-radius: 5px;
-    background-color: #0080ff;
-    color: white;
-    cursor: pointer;
+    overflow: hidden;
 }
 
-.footer-buttons button:hover {
-    background-color: #005bb5; /* Darker Blue on hover */
-}
-
-/* Flex Container Styles */
-.bUbFOU {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 120px;
-    padding: 0 4%;
-    z-index: 999;
-    background-color: white;
-    transition: 0.4s;
-}
-
-/* Full Height Centering */
-.bYSJHd {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    min-height: 100vh;
-    font-size: 4rem;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-}
-
-html {
-    font-size: 100%;
-}
-
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #004080; /* Dark Blue */
-    color: white;
-    padding: 20px;
-    position: relative;
-}
-
-.menu {
-    font-size: 30px;
-    cursor: pointer;
-    padding: 15px; /* Add some padding for the clickable area */
-}
-
-.logo {
-    text-align: center;
-    flex-grow: 1; /* Center the logo */
-}
-
-.logo img {
-    width: 100px; /* Adjust based on your logo size */
-}
-
-.slogan {
-    font-size: 24px;
-    color: #0080ff; /* Lighter blue for contrast */
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    margin-top: 10px;
-}
-
-.sidebar {
-    position: fixed;
-    left: -400px; /* Hide off-screen */
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #c0c0c0;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    transition: left 0.3s ease;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.sidebar button {
+header .search-bar input[type="text"] {
+    flex-grow: 1;
     padding: 10px;
-    margin: 10px 0;
-    background-color: transparent;
-    color: white;
     border: none;
-    cursor: pointer;
-    text-align: left;
-    font-size: 18px;
+    outline: none;
 }
 
-.sidebar button:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Highlight on hover */
-}
-
-.close-btn {
-    align-self: flex-end; /* Position close button to the right */
-    font-size: 24px;
-    background: none;
-    color: white;
+header .search-bar button {
+    background-color: #007bff;
+    color: #fff;
     border: none;
+    padding: 10px 20px;
     cursor: pointer;
 }
 
-.parallax {
-    background-image: url('pexels-falling4utah-1080721.jpg'); /* Add a parallax background image */
-    height: 100vh;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
+/* Hero section styles */
+.hero {
+    background-image: url('hero-background.jpg'); /* Replace with your hero image */
     background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    background-color: #CCC;
+    background-position: center;
+    padding: 100px 0;
     text-align: center;
+    color: #000000;
 }
 
-.content-box {
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    max-width: 800px; /* Optional: limit the width */
-    text-align: left; /* Align text to the left for better readability */
-    height: 300px;
-    font-weight: bold;
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
 }
 
-.daily-tips-bg {
-    background-color: rgba(255, 223, 186, 0.8); /* Light orange */
-    background-image: url('pexels-vanmalidate-784632.jpg');
-    background-size: cover; /* Ensure it covers the div */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat;
+.hero-content p {
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
-.recipe-bg {
-    background-color: rgba(186, 255, 223, 0.8); /* Light green */
-    background-image: url('pexels-janetrangdoan-1099680.jpg');
-    background-size: cover; /* Ensure it covers the div */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat;
-}
-
-.dashboard-bg {
-    background-color: rgba(186, 186, 255, 0.8); /* Light blue */
-    background-image: url('pexels-goumbik-616401.jpg');
-    background-size: cover; /* Ensure it covers the div */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat;
-}
-
-.content-box h2 {
-    color: #004080; /* Dark blue for headings */
-}
-
-.content-box p {
-    color: #ffffff; /* Darker color for text */
-}
-
-.footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #004080; /* Dark Blue */
-}
-
-.footer-buttons {
-    display: flex;
-    justify-content: center;
-}
-
-.footer-buttons button {
-    margin: 0 10px;
-    padding: 10px 15px;
-    border: none;
+.hero-content a {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
     border-radius: 5px;
-    background-color: #0080ff;
-    color: white;
-    cursor: pointer;
 }
 
-.footer-buttons button:hover {
-    background-color: #005bb5; /* Darker Blue on hover */
+/* Features section styles */
+.features {
+    padding: 50px 0;
+    background-color: #9d9dc5;
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 800px) {
-    .footer-buttons {
-        flex-direction: column; /* Stack footer buttons vertically */
-    }
-
-    .footer-buttons button {
-        width: 100%; /* Full width for footer buttons */
-        margin: 10px 0; /* Add margin between footer buttons */
-    }
+.core-features-heading {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-@media (max-width: 500px) {
-    .slogan {
-        font-size: 20px; /* Adjust slogan size */
-    }
-
-    .sidebar button {
-        font-size: 14px; /* Adjust button text size */
-    }
-
-    .content-box {
-        padding: 15px; /* Reduce padding for smaller screens */
-    }
-
-    /* Media Queries for Responsiveness */
-@media (max-width: 900px) {
-    .bUbFOU {
-        justify-content: center;
-        padding: 0;
-        height: 80px;
-    }
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Adjust for different layouts */
+    gap: 20px;
 }
 
-@media (max-width: 56.25em) {
-    html {
-        font-size: 50%;
-    }
+.feature-box {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    border-radius: 10px; /* Add rounded corners */
 }
 
-@media (max-width: 37.5em) {
-    html {
-        font-size: 56.25%;
-    }
+.feature-box:hover {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px); /* Add a slight lift effect */
 }
-    
+
+.feature-box a {
+    text-decoration: none;
+    color: #333;
+}
+
+.user-profile a, .log-in a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+}
+
+.user-profile i, .log-in i {
+    font-size: 32px; /* Adjust size as needed for consistency */
+    color: #000000; /* Set your preferred color */
+}
+
+.user-profile, .log-in {
+    margin: 10px 0; /* Add spacing between the sections if needed */
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .feature-grid {
+        grid-template-columns: 1fr; /* One column per row */
+    }
 }
