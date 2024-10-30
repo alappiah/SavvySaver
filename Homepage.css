@@ -1,5 +1,3 @@
-/* style.css */
-
 /* Global styles */
 body {
     font-family: Arial, sans-serif;
@@ -17,6 +15,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* Allows elements to wrap on smaller screens */
 }
 
 header nav ul {
@@ -24,6 +23,7 @@ header nav ul {
     margin: 0;
     padding: 0;
     display: flex;
+    flex-wrap: wrap; /* Allows navigation items to wrap */
 }
 
 header nav li {
@@ -31,7 +31,7 @@ header nav li {
 }
 
 header nav a {
-    text-decoration:solid;
+    text-decoration: solid;
     color: #000000;
 }
 
@@ -100,7 +100,7 @@ header .search-bar button {
 
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Adjust for different layouts */
+    grid-template-columns: repeat(2, 1fr); /* Default for larger screens */
     gap: 20px;
 }
 
@@ -123,6 +123,7 @@ header .search-bar button {
     color: #333;
 }
 
+/* User Profile and Log In styles */
 .user-profile a, .log-in a {
     text-decoration: none;
     color: inherit;
@@ -140,10 +141,80 @@ header .search-bar button {
     margin: 10px 0; /* Add spacing between the sections if needed */
 }
 
-
 /* Responsive design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+    header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 40px; /* Slightly smaller for laptops */
+    }
+
+    .hero-content p {
+        font-size: 20px; /* Slightly smaller for laptops */
+    }
+
     .feature-grid {
-        grid-template-columns: 1fr; /* One column per row */
+        grid-template-columns: repeat(2, 1fr); /* Keep 2 columns for laptops */
+    }
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px; /* Smaller for tablets/small laptops */
+    }
+
+    .hero-content p {
+        font-size: 18px; /* Smaller for tablets/small laptops */
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr; /* Stack features in a single column */
+    }
+}
+
+/* Additional small screen adjustments */
+@media (max-width: 480px) {
+    header {
+        padding: 10px;
+    }
+
+    header .search-bar input[type="text"] {
+        padding: 5px;
+    }
+
+    header .search-bar button {
+        padding: 5px 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 28px; /* Smaller for mobile */
+    }
+
+    .hero-content p {
+        font-size: 16px; /* Smaller for mobile */
+    }
+
+    .user-profile i, .log-in i {
+        font-size: 24px; /* Smaller icons for mobile */
     }
 }
