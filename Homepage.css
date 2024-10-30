@@ -31,18 +31,24 @@ header nav li {
 }
 
 header nav a {
-    text-decoration: solid;
+    text-decoration: none; /* Corrected from 'solid' to 'none' */
     color: #000000;
 }
 
+/* Navigation Button Styles */
 .nav-button {
-    background-color: rgb(98, 98, 109); /* Dark blue background for buttons */
-    color: rgb(0, 0, 0); /* Text color */
+    background-color: rgb(46, 46, 51); /* Dark blue background for buttons */
+    color: rgb(255, 255, 255); /* Changed to white for better contrast */
     font-weight: bold;
     padding: 10px 15px; /* Button padding */
     text-decoration: none; /* Remove underline */
     border-radius: 20px; /* Rounded corners */
-    transition: background-color 0.3s; /* Smooth transition for hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover */
+}
+
+.nav-button:hover {
+    background-color: rgb(34, 34, 39); /* Darker shade on hover */
+    transform: scale(1.05); /* Slight scale effect on hover */
 }
 
 header .search-bar {
@@ -100,7 +106,7 @@ header .search-bar button {
 /* Features section styles */
 .features {
     padding: 50px 0;
-    background-color: #9d9dc5;
+    background-color: #87ceeb;
 }
 
 .core-features-heading {
@@ -164,6 +170,11 @@ header .search-bar button {
         margin-bottom: 20px;
     }
 
+    header nav li {
+        margin-right: 0; /* Remove right margin in column layout */
+        margin-bottom: 10px; /* Add margin below items */
+    }
+
     .hero-content h1 {
         font-size: 40px; /* Slightly smaller for laptops */
     }
@@ -187,6 +198,11 @@ header .search-bar button {
         flex-direction: column;
         align-items: center;
         margin-bottom: 20px;
+    }
+
+    header nav li {
+        margin-right: 0; /* Remove right margin in column layout */
+        margin-bottom: 10px; /* Add margin below items */
     }
 
     .hero-content h1 {
@@ -226,5 +242,17 @@ header .search-bar button {
 
     .user-profile i, .log-in i {
         font-size: 24px; /* Smaller icons for mobile */
+    }
+}
+
+/* New styles for better responsiveness */
+@media (max-width: 600px) {
+    .nav-button {
+        padding: 8px 12px; /* Smaller buttons for mobile */
+        font-size: 14px; /* Smaller font for mobile */
+    }
+
+    .feature-box {
+        padding: 15px; /* Less padding for mobile feature boxes */
     }
 }
