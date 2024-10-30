@@ -7,7 +7,7 @@ body {
 
 /* Header styles */
 header {
-    background-color: #00008B;
+    background-color: #ccc;
     padding: 20px;
 }
 
@@ -33,6 +33,16 @@ header nav li {
 header nav a {
     text-decoration: solid;
     color: #000000;
+}
+
+.nav-button {
+    background-color: rgb(98, 98, 109); /* Dark blue background for buttons */
+    color: rgb(0, 0, 0); /* Text color */
+    font-weight: bold;
+    padding: 10px 15px; /* Button padding */
+    text-decoration: none; /* Remove underline */
+    border-radius: 20px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover */
 }
 
 header .search-bar {
