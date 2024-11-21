@@ -1,0 +1,258 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+header {
+    background-color: #ccc;
+    padding: 20px;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allows elements to wrap on smaller screens */
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Allows navigation items to wrap */
+}
+
+header nav li {
+    margin-right: 20px;
+}
+
+header nav a {
+    text-decoration: none; /* Corrected from 'solid' to 'none' */
+    color: #000000;
+}
+
+/* Navigation Button Styles */
+.nav-button {
+    background-color: rgb(46, 46, 51); /* Dark blue background for buttons */
+    color: rgb(255, 255, 255); /* Changed to white for better contrast */
+    font-weight: bold;
+    padding: 10px 15px; /* Button padding */
+    text-decoration: none; /* Remove underline */
+    border-radius: 20px; /* Rounded corners */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover */
+}
+
+.nav-button:hover {
+    background-color: rgb(34, 34, 39); /* Darker shade on hover */
+    transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+header .search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+header .search-bar input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+header .search-bar button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Hero section styles */
+.hero {
+    background-image: url('hero-background.jpg'); /* Replace with your hero image */
+    background-size: cover;
+    background-color: #CCC;
+    background-position: center;
+    padding: 100px 0;
+    text-align: center;
+    color: #000000;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.hero-content a {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Features section styles */
+.features {
+    padding: 50px 0;
+    background-color: #ACD9EC;
+}
+
+.core-features-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Default for larger screens */
+    gap: 20px;
+}
+
+.feature-box {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    border-radius: 10px; /* Add rounded corners */
+}
+
+.feature-box:hover {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px); /* Add a slight lift effect */
+}
+
+.feature-box a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* User Profile and Log In styles */
+.user-profile a, .log-in a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+}
+
+.user-profile i, .log-in i {
+    font-size: 32px; /* Adjust size as needed for consistency */
+    color: #000000; /* Set your preferred color */
+}
+
+.user-profile, .log-in {
+    margin: 10px 0; /* Add spacing between the sections if needed */
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    header nav li {
+        margin-right: 0; /* Remove right margin in column layout */
+        margin-bottom: 10px; /* Add margin below items */
+    }
+
+    .hero-content h1 {
+        font-size: 40px; /* Slightly smaller for laptops */
+    }
+
+    .hero-content p {
+        font-size: 20px; /* Slightly smaller for laptops */
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr); /* Keep 2 columns for laptops */
+    }
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    header nav li {
+        margin-right: 0; /* Remove right margin in column layout */
+        margin-bottom: 10px; /* Add margin below items */
+    }
+
+    .hero-content h1 {
+        font-size: 36px; /* Smaller for tablets/small laptops */
+    }
+
+    .hero-content p {
+        font-size: 18px; /* Smaller for tablets/small laptops */
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr; /* Stack features in a single column */
+    }
+}
+
+/* Additional small screen adjustments */
+@media (max-width: 480px) {
+    header {
+        padding: 10px;
+    }
+
+    header .search-bar input[type="text"] {
+        padding: 5px;
+    }
+
+    header .search-bar button {
+        padding: 5px 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 28px; /* Smaller for mobile */
+    }
+
+    .hero-content p {
+        font-size: 16px; /* Smaller for mobile */
+    }
+
+    .user-profile i, .log-in i {
+        font-size: 24px; /* Smaller icons for mobile */
+    }
+}
+
+/* New styles for better responsiveness */
+@media (max-width: 600px) {
+    .nav-button {
+        padding: 8px 12px; /* Smaller buttons for mobile */
+        font-size: 14px; /* Smaller font for mobile */
+    }
+
+    .feature-box {
+        padding: 15px; /* Less padding for mobile feature boxes */
+    }
+}

@@ -3,69 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SavvySaver</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        #content {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .section h2 {
-            margin-top: 0;
-        }
-    </style>
+    <title>Savvy Saver</title>
+    <link rel="stylesheet" href="Homepage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 </head>
 <body>
-    <div id="content">
-        <div class="section">
-            <h2>Daily Tip</h2>
-            <p id="dailyTip">Loading...</p>
+    <header>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="Homepage.html" class="nav-button"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" class="nav-button"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="#" class="nav-button"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="#" class="nav-button"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="Settings.html" class="nav-button"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="logo">
+                <img src="Savvysaver.png" alt="Savvysaverlogo">
+            </div>
+            <!--<div class="search-bar">
+                <input type="text" placeholder="Search">
+                <button>Search</button>
+            </div>!-->
+            <div class="user-profile">
+                <a href="LoginPage.html">
+                    <i class="fas fa-user-circle"></i> <!-- User Icon -->
+                    <span>Login</span> <!-- Text beside the icon -->
+                </a>
+            </div>
+            <div class="log-in">
+                <a href="Register.html">
+                    <i class="fas fa-user-plus"></i> <!-- User Icon -->
+                    <span>Register</span> <!-- Text beside the icon -->
+                </a>
+            </div>
         </div>
+    </header>
 
-        <div class="section">
-            <h2>Recipes</h2>
-            <ul id="recipesList"></ul>
-        </div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Savvy Saver</h1>
+                    <p>Minimize Waste, Maximize Taste.</p>
+                    <a href="#" class="learn-more">Learn More</a>
+                </div>
+            </div>
+        </section>
 
-        <div class="section">
-            <h2>Food Items</h2>
-            <ul id="foodItemsList"></ul>
-        </div>
-    </div>
+        <section class="features">
+            <div class="container">
+                <h2 class="core-features-heading">Core Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-box">
+                        <a href="Dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i> <!-- Dashboard Icon -->
+                            <h3>Dashboard</h3>
+                            <p>A personalized overview of your food inventory, expiration dates, and recipe suggestions.</p>
+                        </a>
+                    </div>
+                    <div class="feature-box">
+                        <a href="Daily_Tips.html">
+                            <i class="fas fa-lightbulb"></i> <!-- Daily Tips Icon -->
+                            <h3>Daily Tips</h3>
+                            <p>Quick and easy ways to save food and money</p>
+                        </a>
+                    </div>
+                    <div class="feature-box">
+                        <a href="Recipe.html">
+                            <i class="fas fa-utensils"></i> <!-- Recipe Recommendations Icon -->
+                            <h3>Recipe Recommendations</h3>
+                            <p>Get inspired by recipes tailored to your fridge and pantry.</p>
+                        </a>
+                    </div>
+                    <div class="feature-box">
+                        <a href="Notification.html">
+                            <i class="fas fa-bell"></i> <!-- Notifications Icon -->
+                            <h3>Notifications</h3>
+                            <p>Stay informed about expiring food items and personalized reminders.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
 
-    <script>
-        async function fetchDailyTip() {
-            const response = await fetch('api.php?endpoint=daily_tip');
-            const tip = await response.json();
-            document.getElementById('dailyTip').innerText = tip.tip_text;
-        }
-
-        async function fetchRecipes() {
-            const response = await fetch('api.php?endpoint=recipes');
-            const recipes = await response.json();
-            const recipesList = document.getElementById('recipesList');
-            recipesList.innerHTML = recipes.map(recipe => `<li>${recipe.recipe_name}</li>`).join('');
-        }
-
-        async function fetchFoodItems(userId) {
-            const response = await fetch(`api.php?endpoint=food_items&user_id=${userId}`);
-            const foodItems = await response.json();
-            const foodItemsList = document.getElementById('foodItemsList');
-            foodItemsList.innerHTML = foodItems.map(item => `<li>${item.item_name} (Expires on: ${item.expiration_date})</li>`).join('');
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchDailyTip();
-            fetchRecipes();
-            fetchFoodItems(1); // Example user ID
-        });
-    </script>
+    <footer>
+        </footer>
 </body>
 </html>
