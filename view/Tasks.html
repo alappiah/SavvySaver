@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../../assets/css/Dashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Dashboard Sidebar -->
+        <div class="dashboard-sidebar">
+            <!-- Brand -->
+            <div class="dashboard-sidebar__brand">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_logo.svg" alt="Logo">
+            </div>
+            <!-- Dashboard Navigation -->
+            <ul class="dashboard-nav">
+                <!-- Daily Tips Nav Item -->
+                <li class="dashboard-nav__item"><a href="../view/daily_tips.html"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_home.svg" alt="Daily Tips">Daily Tips</a></li>
+                <!-- Recipe Recommendations Nav Item -->
+                <li class="dashboard-nav__item"><a href="../view/recipe_recommendation.html"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_home.svg" alt="Recipe Recommendations">Recipe Recommendations</a></li>
+                <!-- Notifications Nav Item -->
+                <li class="dashboard-nav__item"><a href="../view/notifications.html"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_notifications.svg" alt="Notifications">Notifications</a></li>
+                <!-- Food Inventory Nav Item -->
+                <li class="dashboard-nav__item"><a href="../view/inventory.html"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_my_trip.svg" alt="Food Inventory">Food Inventory</a></li>
+                <!-- Recipes Nav Item -->
+                <li class="dashboard-nav__item"><a href="../view/recipes.html"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Recipes">Recipes</a></li>
+                <!-- Recipes Nav Item -->
+                <li class="dashboard-nav__item"><a href="../view/Real_Homepage.html"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Home">Home</a></li>
+                <!-- Recipes Nav Item -->
+                <li class="dashboard-nav__item"><a href="../view/Tasks.html"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Home">Tasks</a></li>
+            </ul>
+        </div>
+        
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <!-- Search Input -->
+                <div class="dashboard-header__search">
+                    <input type="search" placeholder="Search...">
+                </div>
+                <!-- New Plan Icon -->
+                <div class="dashboard-header__new">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_new_plan.svg" alt="New Plan">
+                </div>
+            </div>
+
+            <!-- Dashboard Content Panels -->
+            <div class="dashboard-content__panel dashboard-content__panel--active" data-panel-id="tasks">
+                <div class="dashboard-list">
+                    <!-- Placeholder for tasks -->
+                    <div class="dashboard-list__item dashboard-list__item--placeholder">
+                        <h2>Task 1: Placeholder Task</h2>
+                        <span>Placeholder description...</span>
+                    </div>
+                    <div class="dashboard-list__item dashboard-list__item--placeholder">
+                        <h2>Task 2: Placeholder Task</h2>
+                        <span>Placeholder description...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Task Button -->
+            <div class="create-task">
+                <button id="create-task-btn">Create Task</button>
+            </div>
+
+            <!-- Task Creation Form (hidden by default) -->
+            <div id="create-task-form" style="display: none;">
+                <form action="#" method="POST">
+                    <label for="task-title">Task Title:</label>
+                    <input type="text" id="task-title" name="task-title" required>
+                    <label for="task-description">Task Description:</label>
+                    <textarea id="task-description" name="task-description" required></textarea>
+                    <button type="submit">Create Task</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Task Creation Form
+        document.getElementById('create-task-btn').addEventListener('click', function() {
+            var form = document.getElementById('create-task-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
