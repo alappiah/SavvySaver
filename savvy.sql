@@ -1,6 +1,7 @@
 CREATE TABLE users(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
+    fName VARCHAR(50) NOT NULL,
+    lName VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -65,16 +66,16 @@ CREATE TABLE recipe_recommendations (
 );
 
 
-INSERT INTO users (username, email, password) VALUES 
-('Kwame Nkrumah', 'kwame@gmail.com', 'kwame1542wes'),
-('Akosua Agyapadie', 'akosua@gmail.com', 'ahhdrhb345'),
-('Kojo Bonsu', 'kojo@gmail.com', 'ajhdbhrbuj777'),
-('Yaw Adjei', 'yaw@gmail.com', 'hsbujsjb333'),
-('Abena Osei', 'abena@gmail.com', 'amaseee233'),
-('Kofi Mensah', 'kofi@gmail.com', 'adssesee'),
-('Esi Asante', 'esi@gmail.com', 'amnanbdjnf-jh'),
-('Nana Yaw', 'nana@gmail.com', 'ajndiif0kkgn'),
-('Mabel Tetteh', 'mabel@gmail.com', 'ahbjfnfng');
+INSERT INTO users (fName, lName, email, password) VALUES
+('Kwame', 'Nkrumah', 'kwame@gmail.com', 'kwame1542wes'),
+('Akosua', 'Agyapadie', 'akosua@gmail.com', 'ahhdrhb345'),
+('Kojo', 'Bonsu', 'kojo@gmail.com', 'ajhdbhrbuj777'),
+('Yaw', 'Adjei', 'yaw@gmail.com', 'hsbujsjb333'),
+('Abena', 'Osei', 'abena@gmail.com', 'amaseee233'),
+('Kofi', 'Mensah', 'kofi@gmail.com', 'adssesee'),
+('Esi', 'Asante', 'esi@gmail.com', 'amnanbdjnf-jh'),
+('Nana', 'Yaw', 'nana@gmail.com', 'ajndiif0kkgn'),
+('Mabel', 'Tetteh', 'mabel@gmail.com', 'ahbjfnfng');
 
 
 INSERT INTO food_items (user_id, item_name, expiration_date, quantity) VALUES 
