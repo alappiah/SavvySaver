@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        <?php include '../assets/css/login-sign_in.css'; ?>
-    </style>
+    <link rel="stylesheet" href="../assets/css/login-register.css" />
     <title>Sign Up Page</title>
 </head>
 <body>
@@ -14,27 +12,27 @@
             <div class="sign-in-container">
                 <h1 class="a">Already a Friend?</h1>
                 <p>Login to minimize your waste</p>
-                <a href="login.html">
+                <a href="login.php">
                     <button type="submit">Login</button>
                 </a>
             </div>
         </div>
         <div class="sign-up-container">
             <h1>Sign Up</h1>
-            <form onsubmit="return validateForm()">
-                <input type="text" placeholder="Enter your first name" id="first-name" required>
-                <input type="text" placeholder="Enter your last name"  id="last-name" required>
+            <form onsubmit="return validateForm()" action="../actions/register_user.php" method="POST">
+            <input type="text" name="fName" placeholder="First Name" id="first-name" required>
+                <input type="text" name="lName" placeholder="Last Name" id="last-name" required>
 
-                <input type="email" id="email" placeholder="Enter your email">
+                <input type="email" name="email" id="email" placeholder="Email" required>
                 <span id="email-error" class="error-message"></span>
 
-                <input type="password" id="password" placeholder="Enter your password">
+                <input type="password" name="password" id="password" placeholder="Password" required>
                 <span id="password-error" class="error-message"></span>
                 
-                <input type="password" id="confirm-password" placeholder="Confirm Password" >
+                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required>
                 <span id="confirm-password-error" class="error-message"></span>
 
-                <button type="submit">Sign Up</button>
+                <button type="submit" name="signUp">Sign Up</button>
             </form>
         </div>
     </div>

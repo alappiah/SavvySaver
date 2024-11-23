@@ -4,39 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <style>
-        <?php include '../assets/css/login-sign_in.css'; ?>
-    </style>
+    <link rel="stylesheet" href="../assets/css/login-register.css" />
     <title>Login Page</title>
 </head>
 <body>
     <div class="container">
         <div class="login-container">
             <h1>Login</h1>
-            <div class="social-icons">
-                <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-            </div>
-            <span>Or use your email password</span>
-            <form onsubmit="return validateForm()">
-                <input type="email" id="email" name="email" placeholder="Enter your email">
+            <form onsubmit="return validateForm()" action="../actions/login_user.php" METHOD="POST">
+                <input type="email" name="email" id="email" placeholder="Email" required>
                 <span id="email-error" class="error-message"></span>
 
-                <input type="password" id="password" placeholder="Enter your password">
+                <input type="password" name="password" id="password" placeholder="Password" required>
                 <span id="password-error" class="error-message"></span>
 
                 <div class="remember-forgot">
-                    <label for="checkbox"><input type="checkbox" id="checkbox">Remember Me</label>
-                    <a href="#">Forgot Your Password?</a>
+                    <label for="checkbox"><input type="checkbox" id="checkbox" name="remember">Remember Me</label>
+                    <a href="#">Forget Your Password?</a>
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" name="login">Login</button>
             </form>
         </div>
         <div class="toggle-container">
             <div class="welcome-container">
                 <h1 class="a">Welcome, Friend</h1>
                 <p>Unleash your taste with SavvySaver</p>
-                <a href="sign-up.html">
+                <a href="register.php">
                     <button type="submit">Create Account</button>
                 </a>
             </div>

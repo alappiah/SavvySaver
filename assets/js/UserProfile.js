@@ -46,3 +46,58 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const newPasswordField = document.getElementById("new-password");
+    const confirmPasswordField = document.getElementById("confirm-password");
+    const newPasswordError = document.getElementById("new-password-error");
+    const confirmPasswordError = document.getElementById("confirm-password-error");
+
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9]{3,})(?=.*[!@#\$%\^&\*]).{8,}$/;
+
+    // Validate password as the user types
+    newPasswordField.addEventListener("input", function () {
+        const password = this.value.trim();
+        newPasswordError.textContent = ""; // Clear previous error message
+
+        if (password !== "" && !passwordRegex.test(password)) {
+            newPasswordError.textContent = "Password must be at least 8 characters long, contain an uppercase letter, at least 3 digits, and a special character.";
+        }
+    });
+
+    // Validate confirm password
+    confirmPasswordField.addEventListener("input", function () {
+        const confirmPassword = this.value.trim();
+        confirmPasswordError.textContent = ""; // Clear previous error message
+
+        if (confirmPassword !== "" && confirmPassword !== newPasswordField.value.trim()) {
+            confirmPasswordError.textContent = "Passwords do not match.";
+        }
+    });
+
+    // Form submission validation
+    document.getElementById("account-security-form").addEventListener("submit", function (e) {
+        let isValid = true;
+
+        // Validate new password
+        const newPassword = newPasswordField.value.trim();
+        if (newPassword === "") {
+            newPasswordError.textContent = "Password is required";
+            isValid = false;
+        } else if (!passwordRegex.test(newPassword)) {
+            newPasswordError.textContent = "Password must be at least 8 characters long, contain an uppercase letter, at least 3 digits, and a special character.";
+            isValid = false;
+        }
+
+        // Validate confirm password
+        const confirmPassword = confirmPasswordField.value.trim();
+        if (confirmPassword !== newPassword) {
+            confirmPasswordError.textContent = "Passwords do not match.";
+            isValid = false;
+        }
+
+        if (!isValid) {
+            e.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+});
+
