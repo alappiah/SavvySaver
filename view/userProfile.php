@@ -105,10 +105,10 @@
 
             <section id="feedback" class="section-content">
                 <h2>Feedback</h2>
-                <form id="feedback-form">
+                <form id="feedback-form" method="POST" action="../functions/feedback_user.php">
                     <div class="form-group">
                         <label for="feedback-input">Your Feedback</label>
-                        <textarea id="feedback-input" placeholder="How was your experience?"></textarea>
+                        <textarea id="feedback-input" name="feedback-text" placeholder="How was your experience?"></textarea>
                     </div>
                     <button type="submit" class="save-btn">Submit Feedback</button>
                 </form>
