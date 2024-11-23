@@ -46,7 +46,7 @@ if (isset($_POST['login'])) {
             $_SESSION['first_name'] = $user['fname'];
             $_SESSION['last_name'] = $user['lname'];
 
-            header("Location:  Homepage.html"); // For admin
+            header("Location:  ../view/Real_Homepage.php"); // For admin
            
             exit(); // Make sure to exit after header
         } else {
