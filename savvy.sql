@@ -7,77 +7,86 @@ CREATE TABLE users(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+
+-- Create the 'food_items' table
 CREATE TABLE food_items (
-    item_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    item_name VARCHAR(100) NOT NULL,
-    expiration_date DATE NOT NULL,
-    quantity INT NOT NULL,
-    added_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+    item_id INT AUTO_INCREMENT PRIMARY KEY,          -- Food item ID
+    user_id INT,                                     -- User ID (foreign key)
+    item_name VARCHAR(100) NOT NULL,                  -- Food item name
+    expiration_date DATE NOT NULL,                    -- Expiration date
+    quantity INT NOT NULL,                            -- Quantity of the item
+    added_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,     -- Date item was added
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE  -- Foreign key to users table
 );
 
+-- Create the 'notifications' table for food expiration reminders
 CREATE TABLE notifications (
-    notification_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    item_id INT,
-    message VARCHAR(255) NOT NULL,
-    sent_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    seen BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (item_id) REFERENCES food_items(item_id) ON DELETE CASCADE
+    notification_id INT AUTO_INCREMENT PRIMARY KEY,  -- Notification ID
+    user_id INT,                                     -- User ID (foreign key)
+    item_id INT,                                     -- Item ID (foreign key)
+    message VARCHAR(255) NOT NULL,                    -- Notification message
+    sent_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,      -- Date and time the notification was sent
+    seen BOOLEAN DEFAULT FALSE,                       -- Whether the notification has been read
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,  -- Link to users table
+    FOREIGN KEY (item_id) REFERENCES food_items(item_id) ON DELETE CASCADE  -- Link to food_items table
 );
 
+-- Create the 'recipes' table
 CREATE TABLE recipes (
-    recipe_id INT AUTO_INCREMENT PRIMARY KEY,
-    recipe_name VARCHAR(100) NOT NULL,
-    instructions TEXT NOT NULL,
-    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    recipe_id INT AUTO_INCREMENT PRIMARY KEY,        -- Recipe ID
+    recipe_name VARCHAR(100) NOT NULL,                -- Recipe name
+    instructions TEXT NOT NULL,                       -- Cooking instructions
+    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP    -- Date recipe was created
 );
 
+-- Create the 'recipe_ingredients' table for recipe ingredients
 CREATE TABLE recipe_ingredients (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    recipe_id INT,
-    ingredient_name VARCHAR(100) NOT NULL,
-    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE
+    id INT AUTO_INCREMENT PRIMARY KEY,               -- Ingredient ID
+    recipe_id INT,                                    -- Recipe ID (foreign key)
+    ingredient_name VARCHAR(100) NOT NULL,            -- Ingredient name
+    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE  -- Link to recipes table
 );
 
+-- Create the 'feedback' table for user feedback
 CREATE TABLE feedback (
-    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    feedback_text TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+    feedback_id INT AUTO_INCREMENT PRIMARY KEY,      -- Feedback ID
+    user_id INT,                                     -- User ID (foreign key)
+    feedback_text TEXT NOT NULL,                     -- Feedback content
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp of feedback submission
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE  -- Link to users table
 );
 
+-- Create the 'daily_tips' table for food storage tips
 CREATE TABLE daily_tips (
-    tip_id INT AUTO_INCREMENT PRIMARY KEY,
-    tip_text TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    tip_id INT AUTO_INCREMENT PRIMARY KEY,           -- Tip ID
+    tip_text TEXT NOT NULL,                          -- Tip content
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP   -- Timestamp for when the tip was added
 );
 
+-- Create the 'recipe_recommendations' table for recommending recipes to users
 CREATE TABLE recipe_recommendations (
-    recommendation_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    recipe_id INT,
-    recommended_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE
+    recommendation_id INT AUTO_INCREMENT PRIMARY KEY, -- Recommendation ID
+    user_id INT,                                      -- User ID (foreign key)
+    recipe_id INT,                                    -- Recipe ID (foreign key)
+    recommended_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Timestamp for the recommendation
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,  -- Link to users table
+    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE  -- Link to recipes table
 );
 
 
-INSERT INTO users (fName, lName, email, password) VALUES
-('Kwame', 'Nkrumah', 'kwame@gmail.com', 'kwame1542wes'),
-('Akosua', 'Agyapadie', 'akosua@gmail.com', 'ahhdrhb345'),
-('Kojo', 'Bonsu', 'kojo@gmail.com', 'ajhdbhrbuj777'),
-('Yaw', 'Adjei', 'yaw@gmail.com', 'hsbujsjb333'),
-('Abena', 'Osei', 'abena@gmail.com', 'amaseee233'),
-('Kofi', 'Mensah', 'kofi@gmail.com', 'adssesee'),
-('Esi', 'Asante', 'esi@gmail.com', 'amnanbdjnf-jh'),
-('Nana', 'Yaw', 'nana@gmail.com', 'ajndiif0kkgn'),
-('Mabel', 'Tetteh', 'mabel@gmail.com', 'ahbjfnfng');
+INSERT INTO users (username, email, password) VALUES 
+('Kwame Nkrumah', 'kwame@gmail.com', 'kwame1542wes'),
+('Akosua Agyapadie', 'akosua@gmail.com', 'ahhdrhb345'),
+('Kojo Bonsu', 'kojo@gmail.com', 'ajhdbhrbuj777'),
+('Yaw Adjei', 'yaw@gmail.com', 'hsbujsjb333'),
+('Abena Osei', 'abena@gmail.com', 'amaseee233'),
+('Kofi Mensah', 'kofi@gmail.com', 'adssesee'),
+('Esi Asante', 'esi@gmail.com', 'amnanbdjnf-jh'),
+('Nana Yaw', 'nana@gmail.com', 'ajndiif0kkgn'),
+('Mabel Tetteh', 'mabel@gmail.com', 'ahbjfnfng');
 
-
+-- Insert sample data into 'food_items'
 INSERT INTO food_items (user_id, item_name, expiration_date, quantity) VALUES 
 (1, 'Rice', '2024-11-10', 2),
 (1, 'Tomatoes', '2024-11-05', 5),
@@ -90,7 +99,7 @@ INSERT INTO food_items (user_id, item_name, expiration_date, quantity) VALUES
 (6, 'Cabbage', '2024-11-07', 2),
 (7, 'Peppers', '2024-11-11', 4);
 
-
+-- Insert sample data into 'recipes'
 INSERT INTO recipes (recipe_name, instructions) VALUES 
 ('Jollof Rice', 'Cook rice in a pot with tomatoes, onions, and spices.'),
 ('Kelewele', 'Fry ripe plantains seasoned with ginger and spices.'),
@@ -103,7 +112,7 @@ INSERT INTO recipes (recipe_name, instructions) VALUES
 ('Palava Sauce', 'Cook vegetables and serve with boiled plantains.'),
 ('Light Soup', 'Make a soup from fish and spices, served with fufu.');
 
-
+-- Insert sample data into 'recipe_ingredients'
 INSERT INTO recipe_ingredients (recipe_id, ingredient_name) VALUES
 (1, 'Rice'),
 (1, 'Tomatoes'),
@@ -139,7 +148,7 @@ INSERT INTO recipe_ingredients (recipe_id, ingredient_name) VALUES
 (10, 'Pepper'),
 (10, 'Tomatoes');
 
-
+-- Insert sample data into 'daily_tips'
 INSERT INTO daily_tips (tip_text) VALUES 
 ('Check your fridge weekly to prevent spoilage.'),
 ('Store tomatoes at room temperature for better flavor.'),
@@ -152,7 +161,7 @@ INSERT INTO daily_tips (tip_text) VALUES
 ('Buy only what you need to reduce waste.'),
 ('Learn to cook with leftovers for a delicious meal.');
 
-
+-- Insert sample data into 'feedback'
 INSERT INTO feedback (user_id, feedback_text) VALUES 
 (1, 'Great app! It helped me reduce food waste significantly.'),
 (2, 'I love the recipe suggestions; they are very helpful.'),
@@ -164,7 +173,7 @@ INSERT INTO feedback (user_id, feedback_text) VALUES
 (8, 'I appreciate the daily tips; they are very practical.'),
 (9, 'Can we add a feature to track leftovers?');
 
-
+-- Insert sample data into 'notifications'
 INSERT INTO notifications (user_id, item_id, message) VALUES 
 (1, 2, 'Your tomatoes will expire in 3 days!'),
 (2, 1, 'Remember to use your chicken soon!'),

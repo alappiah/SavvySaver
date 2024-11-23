@@ -307,25 +307,6 @@ ul {
   justify-content: flex-start;
 }
 
-.auth-buttons {
-  display: flex;
-  align-items: center;
-  gap: 15px; /* Space between buttons */
-  justify-content: flex-end; /* Align to the right */
-}
-
-.auth-buttons .btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 15px;
-  background: #181D4E;
-  color: white;
-  border-radius: 30px;
-  font-size: 14px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
 .auth-buttons .btn i {
   margin-right: 5px;
 }
