@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile Settings</title>
-    <link rel="stylesheet" href="userProfileCss.css">
+    <link rel="stylesheet" href="../assets/css/userProfileCss.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -28,7 +28,7 @@
             <!-- Sections -->
             <section id="personal-info" class="section-content active">
                 <h2>Personal Information</h2>
-                <form id="user-profile-form" method="POST" action="updateProfile.php">
+                <form id="user-profile-form" method="POST" action="../functions/updateProfile.php">
                     <div class="profile-picture-container">
                         <div class="profile-picture-card">
                             <img id="profile-image-preview" src="default-profile.png" alt="Profile Picture">
@@ -66,7 +66,7 @@
 
             <section id="account-security" class="section-content">
                 <h2>Account Security</h2>
-                <form id="account-security-form" method="POST" action="password-change.php">
+                <form id="account-security-form" method="POST" action="../functions/password-change.php">
                     <h3>Change Password</h3>
                     <div class="form-group">
                         <label for="current-password">Current Password</label>
@@ -121,6 +121,6 @@
         &copy; SavvySaver 2024. All rights reserved.
     </footer>
 
-    <script src="UserProfile.js"></script>
+    <script src="../assets/js/UserProfile.js"></script>
 </body>
 </html>
