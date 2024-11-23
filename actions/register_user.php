@@ -1,6 +1,6 @@
 <?php
 // Include database connection
-include ('database.php');
+include ('../db/database.php');
 
 // Check if the connection was successful
 if ($conn->connect_error) {
@@ -23,13 +23,15 @@ if (isset($_POST['signUp'])) {
 
     // Validate email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format!";
+        echo "<script>alert('Invalid email format!');
+        window.location.href = '../view/register.php';</script>";
         exit();
     }
 
     // Check if passwords match
     if ($password !== $confirmPassword) {
-        echo "Passwords do not match!";
+        echo "<script>alert('Passwords do not match!');
+        window.location.href = '../view/register.php';</script>";
         exit();
     }
 
@@ -51,7 +53,8 @@ if (isset($_POST['signUp'])) {
     $result = $checkEmailQuery->get_result();
 
     if ($result->num_rows > 0) {
-        echo "Email Address Already Exists!";
+        echo "<script>alert('Email Address Already Exists!');
+            window.location.href = '../view/register.php';</script>";
         exit();
     } else {
         // Insert user details into the database using prepared statements
@@ -65,7 +68,7 @@ if (isset($_POST['signUp'])) {
 
         if ($insertQuery->execute()) {
             // Redirect to login page after successful registration
-            header("Location: login.php");
+            header("Location: ../view/login.php");
             exit();
         } else {
             echo "Error: " . $conn->error;

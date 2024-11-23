@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="login-register.css" />
+    <link rel="stylesheet" href="../assets/css/login-register.css" />
     <title>Sign Up Page</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
         </div>
         <div class="sign-up-container">
             <h1>Sign Up</h1>
-            <form onsubmit="return validateForm()" action="register_user.php" method="POST">
+            <form onsubmit="return validateForm()" action="../actions/register_user.php" method="POST">
             <input type="text" name="fName" placeholder="First Name" id="first-name" required>
                 <input type="text" name="lName" placeholder="Last Name" id="last-name" required>
 

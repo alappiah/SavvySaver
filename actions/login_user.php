@@ -3,7 +3,7 @@
 session_start();
 
 // Include database connection
-include('database.php');
+include('../db/database.php');
 
 if (isset($_POST['login'])) {
     // Sanitize input to prevent SQL injection
@@ -32,7 +32,7 @@ if (isset($_POST['login'])) {
         // No user found with this email, redirect with an alert
         echo "<script>
                 alert('No user found with this email!');
-                window.location.href = 'login.php';
+                window.location.href = '../view/login.php';
               </script>";
         exit();
     } else {
@@ -53,7 +53,7 @@ if (isset($_POST['login'])) {
             // Incorrect password, redirect with an alert
             echo "<script>
                     alert('Incorrect password!');
-                    window.location.href = 'login.php';
+                    window.location.href = '../view/login.php';
                   </script>";
             exit();
         }
