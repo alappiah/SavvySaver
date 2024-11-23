@@ -1,10 +1,10 @@
 <?php
 // Include the database connection file
-require '../db/database.php'; // Adjust the path as needed
+include('../db/database.php'); // Adjust the path as needed
 
 // Start session to handle logged-in user
 session_start();
-$user_id = 1; // Replace with your session variable for the user, for example $_SESSION['user_id']
+$user_id = $_SESSION['user_id']; // Replace with your session variable for the user, for example $_SESSION['user_id']
 
 // Handle form submission for adding a new food item
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,14 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $expiration_date = $_POST['expiration-date'];
     $quantity = $_POST['quantity'];
 
-    // Prepare the SQL query to insert data into the database
+    // Prepare the SQL query to insert data into the database using mysqli
     $query = "INSERT INTO food_items (user_id, item_name, expiration_date, quantity, added_on) 
-              VALUES (:user_id, :item_name, :expiration_date, :quantity, NOW())";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    $stmt->bindParam(':item_name', $item_name, PDO::PARAM_STR);
-    $stmt->bindParam(':expiration_date', $expiration_date, PDO::PARAM_STR);
-    $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+              VALUES (?, ?, ?, ?, NOW())";
+    
+    // Prepare statement
+    $stmt = $conn->prepare($query);
+    
+    // Bind parameters
+    $stmt->bind_param("issi", $user_id, $item_name, $expiration_date, $quantity);
 
     // Execute the query and check if the insertion was successful
     if ($stmt->execute()) {
@@ -28,14 +29,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $message = "Error adding food item. Please try again.";
     }
+    // Close statement
+    $stmt->close();
 }
 
 // Fetch the list of food items for the logged-in user
-$query = "SELECT * FROM food_items WHERE user_id = :user_id ORDER BY added_on DESC";
-$stmt = $pdo->prepare($query);
-$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+$query = "SELECT * FROM food_items WHERE user_id = ? ORDER BY added_on DESC";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $user_id); // Bind the user_id as an integer
 $stmt->execute();
-$food_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$result = $stmt->get_result(); // Get the result set
+$food_items = $result->fetch_all(MYSQLI_ASSOC); // Fetch all rows as an associative array
+
+// Close statement
+$stmt->close();
 ?>
 
 <!DOCTYPE html>

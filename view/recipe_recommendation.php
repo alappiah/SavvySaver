@@ -1,10 +1,10 @@
 <?php
 // Include the database connection file
-require '../db/database.php'; // Adjust the path as needed
+include('../db/database.php'); // Adjust the path as needed
 
 // Start session to handle logged-in user
 session_start();
-$user_id =  1 ; // Replace with your session variable for the user
+$user_id = $_SESSION['user_id']; // Replace with your session variable for the user
 
 // Redirect to login if the user is not authenticated
 //if (!$user_id) {
@@ -12,17 +12,41 @@ $user_id =  1 ; // Replace with your session variable for the user
 //    exit();
 //}
 
-// Fetch 3 random recipe recommendations for the user, joining with the recipes table
-$query = "SELECT r.recipe_name, r.instructions, rr.recommended_on
-          FROM recipe_recommendations rr
-          JOIN recipes r ON rr.recipe_id = r.recipe_id
-          WHERE rr.user_id = :user_id
-          ORDER BY rr.recommended_on DESC
-          LIMIT 3"; // Adjusted to fetch based on the latest recommendations
-$stmt = $pdo->prepare($query);
-$stmt->execute(['user_id' => $user_id]);
-$recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Create a connection (assuming $conn is your MySQLi connection)
+if ($conn) {
+    // Fetch 3 random recipe recommendations for the user, joining with the recipes table
+    $query = "SELECT r.recipe_name, r.instructions, rr.recommended_on
+              FROM recipe_recommendations rr
+              JOIN recipes r ON rr.recipe_id = r.recipe_id
+              WHERE rr.user_id = ?
+              ORDER BY rr.recommended_on DESC
+              LIMIT 3"; // Adjusted to fetch based on the latest recommendations
+    
+    // Prepare the statement
+    if ($stmt = $conn->prepare($query)) {
+        // Bind parameters
+        $stmt->bind_param("i", $user_id); // "i" indicates the parameter is an integer
+        
+        // Execute the query
+        $stmt->execute();
+        
+        // Get the result
+        $result = $stmt->get_result();
+        
+        // Fetch all recipes
+        $recipes = $result->fetch_all(MYSQLI_ASSOC);
+        
+        // Close the statement
+        $stmt->close();
+    } else {
+        die("Error preparing query: " . $conn->error);
+    }
+} else {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -74,6 +74,17 @@ CREATE TABLE recipe_recommendations (
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE  -- Link to recipes table
 );
 
+CREATE TABLE tasks (
+    task_id INT AUTO_INCREMENT PRIMARY KEY,          -- Task ID
+    user_id INT NOT NULL,                            -- User ID (foreign key)
+    task_name VARCHAR(255) NOT NULL,                  -- Task name (e.g., food to consume)
+    task_description TEXT,                           -- Task description (optional)
+    is_completed TINYINT(1) DEFAULT 0,                -- Task completion status (0 = not completed, 1 = completed)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   -- Task creation timestamp
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Last update timestamp
+    due_date DATETIME,                               -- Optional due date for tasks
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE  -- Link to users table
+);
 
 INSERT INTO users (fName, lName, email, password) VALUES
 ('Kwame', 'Nkrumah', 'kwame@gmail.com', 'kwame1542wes'),

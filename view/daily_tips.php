@@ -1,23 +1,38 @@
 <?php
 // Include the database connection file
-require '../db/database.php'; // Adjust the path as needed
+include('../db/database.php'); // Adjust the path as needed
 
 // Start session to handle logged-in user
 session_start();
-$user_id = 1; // Replace with your session variable for the user, for example $_SESSION['user_id']
+$user_id = $_SESSION['user_id']; // Replace with your session variable for the user, for example $_SESSION['user_id']
 
-// Fetch all tasks for the logged-in user from the database
-$query_tasks = "SELECT task_id, task_name, task_description, due_date, is_completed FROM tasks WHERE user_id = :user_id ORDER BY due_date";
-$stmt_tasks = $pdo->prepare($query_tasks);
-$stmt_tasks->bindParam(':user_id', $user_id, PDO::PARAM_INT); // Bind the user_id parameter
-$stmt_tasks->execute();
-$tasks = $stmt_tasks->fetchAll(PDO::FETCH_ASSOC);
+// Check if the user is logged in and fetch all tasks for the logged-in user
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id']; // Replace this with the actual session variable
+    // Create the connection (assuming $conn is your MySQLi connection)
+    
+    // Fetch all tasks for the logged-in user from the database using MySQLi
+    $query_tasks = "SELECT task_id, task_name, task_description, due_date, is_completed FROM tasks WHERE user_id = ? ORDER BY due_date";
+    if ($stmt_tasks = $conn->prepare($query_tasks)) {
+        $stmt_tasks->bind_param("i", $user_id); // Bind the user_id parameter as an integer
+        $stmt_tasks->execute();
+        $result_tasks = $stmt_tasks->get_result();
+        $tasks = $result_tasks->fetch_all(MYSQLI_ASSOC);
+        $stmt_tasks->close();
+    } else {
+        // If prepare() fails, show the error
+        die("Error in SQL query: " . $conn->error);
+    }
 
-// Fetch the latest two tips from the database
-$query_tips = "SELECT tip_text FROM daily_tips ORDER BY created_at DESC LIMIT 2";
-$stmt_tips = $pdo->prepare($query_tips);
-$stmt_tips->execute();
-$tips = $stmt_tips->fetchAll(PDO::FETCH_ASSOC);
+    // Fetch the latest two tips from the database
+    $query_tips = "SELECT tip_text FROM daily_tips ORDER BY created_at DESC LIMIT 2";
+    $result_tips = $conn->query($query_tips);
+    if ($result_tips) {
+        $tips = $result_tips->fetch_all(MYSQLI_ASSOC);
+    } else {
+        die("Error fetching tips: " . $conn->error);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +41,7 @@ $tips = $stmt_tips->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <style>
-        <?php include '../assets/css/dailytipsdash.css'; ?>
-    </style>
+    <link rel="stylesheet" href="../assets/css/dailytipsdash.css">
 </head>
 <body>
     <div class="dashboard">

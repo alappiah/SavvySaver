@@ -1,16 +1,21 @@
 <?php
 // Include the database connection file
-require '../db/database.php'; // Adjust the path as needed
+include('../db/database.php'); // Adjust the path as needed
 
 // Start session to handle logged-in user
 session_start();
-$user_id = $_SESSION['user_id'] ?? null; // Replace with your session variable for the user
+$user_id = $_SESSION['user_id']; // Replace with your session variable for the user
 
-// Fetch all recipes from the database
+// Fetch all recipes from the database using mysqli
 $query = "SELECT recipe_id, recipe_name, instructions FROM recipes ORDER BY recipe_name";
-$stmt = $pdo->prepare($query);
-$stmt->execute();
-$recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$result = $conn->query($query); // Use mysqli's query method
+
+// Check if there are any recipes returned
+if ($result) {
+    $recipes = $result->fetch_all(MYSQLI_ASSOC); // Fetch all rows as an associative array
+} else {
+    $recipes = []; // Set empty array if no recipes are found
+}
 
 // Handle form submission to create a new recipe
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -20,13 +25,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Ensure recipe_name and instructions are not empty
     if (!empty($recipe_name) && !empty($instructions)) {
         // Insert the new recipe into the database
-        $insert_query = "INSERT INTO recipes (recipe_name, instructions) VALUES (:recipe_name, :instructions)";
-        $insert_stmt = $pdo->prepare($insert_query);
-        $insert_stmt->execute(['recipe_name' => $recipe_name, 'instructions' => $instructions]);
+        $insert_query = "INSERT INTO recipes (recipe_name, instructions) VALUES (?, ?)";
+        $stmt = $conn->prepare($insert_query); // Prepare the statement
 
-        // Redirect to the same page after submission to avoid resubmission
-        header("Location: {$_SERVER['PHP_SELF']}");
-        exit();
+        // Bind parameters (s = string, s = string)
+        $stmt->bind_param("ss", $recipe_name, $instructions);
+
+        // Execute the query
+        if ($stmt->execute()) {
+            // Redirect to the same page after submission to avoid resubmission
+            header("Location: {$_SERVER['PHP_SELF']}");
+            exit();
+        } else {
+            // Handle the error if insertion fails
+            echo "Error adding recipe: " . $stmt->error;
+        }
+
+        // Close the statement
+        $stmt->close();
     } else {
         // Handle the error if fields are empty
         echo "Both recipe name and instructions are required!";
