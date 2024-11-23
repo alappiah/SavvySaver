@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt->close();
     } else {
-        echo "User is not logged in.";
+        echo "User is not logged .";
     }
 }
 
