@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile Settings</title>
-    <link rel="stylesheet" href="../assets/css/userProfileCss.css">
+    <link rel="stylesheet" href="userProfileCss.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -28,7 +28,7 @@
             <!-- Sections -->
             <section id="personal-info" class="section-content active">
                 <h2>Personal Information</h2>
-                <form id="user-profile-form">
+                <form id="user-profile-form" method="POST" action="updateProfile.php">
                     <div class="profile-picture-container">
                         <div class="profile-picture-card">
                             <img id="profile-image-preview" src="default-profile.png" alt="Profile Picture">
@@ -37,13 +37,13 @@
                     </div>
                     <div class="form-group">
                         <label for="fname">First Name</label>
-                        <input type="text" id="fname1" placeholder="Enter your name">
+                        <input type="text" id="fname" name="fName" placeholder="Enter your first name">
                         <label for="lname">Last Name</label>
-                        <input type="text" id="lname" placeholder="Enter your name">
+                        <input type="text" id="lname" name="lName" placeholder="Enter your last name">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="Enter your email">
+                        <input type="email" id="email" name="email" placeholder="Enter your email">
                     </div>
                     <button type="submit" class="save-btn">Save Changes</button>
                 </form>
@@ -66,10 +66,22 @@
 
             <section id="account-security" class="section-content">
                 <h2>Account Security</h2>
-                <form id="account-security-form">
+                <form id="account-security-form" method="POST" action="password-change.php">
+                    <h3>Change Password</h3>
                     <div class="form-group">
-                        <label for="new-password">Change Password</label>
-                        <input type="password" id="new-password" placeholder="New Password">
+                        <label for="current-password">Current Password</label>
+                        <input type="password" id="current-password" name="currentPassword" placeholder="Enter current password" required>
+                        <span id="current-password-error" style="color: red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">New Password</label>
+                        <input type="password" id="new-password" name="newPassword" placeholder="Enter new password">
+                        <span id="new-password-error" style="color: red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm new password">
+                        <span id="confirm-password-error" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Two-Factor Authentication</label>
@@ -109,6 +121,6 @@
         &copy; SavvySaver 2024. All rights reserved.
     </footer>
 
-    <script src="../assets/js/UserProfile.js"></script>
+    <script src="UserProfile.js"></script>
 </body>
 </html>

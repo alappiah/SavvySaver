@@ -75,16 +75,16 @@ CREATE TABLE recipe_recommendations (
 );
 
 
-INSERT INTO users (username, email, password) VALUES 
-('Kwame Nkrumah', 'kwame@gmail.com', 'kwame1542wes'),
-('Akosua Agyapadie', 'akosua@gmail.com', 'ahhdrhb345'),
-('Kojo Bonsu', 'kojo@gmail.com', 'ajhdbhrbuj777'),
-('Yaw Adjei', 'yaw@gmail.com', 'hsbujsjb333'),
-('Abena Osei', 'abena@gmail.com', 'amaseee233'),
-('Kofi Mensah', 'kofi@gmail.com', 'adssesee'),
-('Esi Asante', 'esi@gmail.com', 'amnanbdjnf-jh'),
-('Nana Yaw', 'nana@gmail.com', 'ajndiif0kkgn'),
-('Mabel Tetteh', 'mabel@gmail.com', 'ahbjfnfng');
+INSERT INTO users (fName, lName, email, password) VALUES
+('Kwame', 'Nkrumah', 'kwame@gmail.com', 'kwame1542wes'),
+('Akosua', 'Agyapadie', 'akosua@gmail.com', 'ahhdrhb345'),
+('Kojo', 'Bonsu', 'kojo@gmail.com', 'ajhdbhrbuj777'),
+('Yaw', 'Adjei', 'yaw@gmail.com', 'hsbujsjb333'),
+('Abena', 'Osei', 'abena@gmail.com', 'amaseee233'),
+('Kofi', 'Mensah', 'kofi@gmail.com', 'adssesee'),
+('Esi', 'Asante', 'esi@gmail.com', 'amnanbdjnf-jh'),
+('Nana', 'Yaw', 'nana@gmail.com', 'ajndiif0kkgn'),
+('Mabel', 'Tetteh', 'mabel@gmail.com', 'ahbjfnfng');
 
 -- Insert sample data into 'food_items'
 INSERT INTO food_items (user_id, item_name, expiration_date, quantity) VALUES 
