@@ -1,4 +1,4 @@
-CREATE TABLE users(
+CREATE TABLE team_project_users(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     fName VARCHAR(50) NOT NULL,
     lName VARCHAR(50) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE notifications (
 );
 
 -- Create the 'recipes' table
-CREATE TABLE recipes (
+CREATE TABLE team_project_recipes (
     recipe_id INT AUTO_INCREMENT PRIMARY KEY,        -- Recipe ID
     recipe_name VARCHAR(100) NOT NULL,                -- Recipe name
     instructions TEXT NOT NULL,                       -- Cooking instructions
@@ -86,7 +86,7 @@ CREATE TABLE tasks (
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE  -- Link to users table
 );
 
-INSERT INTO users (fName, lName, email, password) VALUES
+INSERT INTO team_project_users (fName, lName, email, password) VALUES
 ('Kwame', 'Nkrumah', 'kwame@gmail.com', 'kwame1542wes'),
 ('Akosua', 'Agyapadie', 'akosua@gmail.com', 'ahhdrhb345'),
 ('Kojo', 'Bonsu', 'kojo@gmail.com', 'ajhdbhrbuj777'),
@@ -111,7 +111,7 @@ INSERT INTO food_items (user_id, item_name, expiration_date, quantity) VALUES
 (7, 'Peppers', '2024-11-11', 4);
 
 -- Insert sample data into 'recipes'
-INSERT INTO recipes (recipe_name, instructions) VALUES 
+INSERT INTO team_project_recipes (recipe_name, instructions) VALUES 
 ('Jollof Rice', 'Cook rice in a pot with tomatoes, onions, and spices.'),
 ('Kelewele', 'Fry ripe plantains seasoned with ginger and spices.'),
 ('Chili Stew', 'Cook chicken in a spicy tomato sauce.'),
