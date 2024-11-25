@@ -53,12 +53,10 @@
                 <h2>Notification Settings</h2>
                 <form id="notification-settings-form">
                     <div class="form-group">
-                        <label>Email Notifications</label>
-                        <input type="checkbox" id="email-notifications" checked> Receive email notifications
-                    </div>
-                    <div class="form-group">
-                        <label>SMS Notifications</label>
-                        <input type="checkbox" id="sms-notifications"> Receive SMS notifications
+                        <label for="email-notifications">
+                            <input type="checkbox" id="email-notifications" name="emailNotifications" checked>
+                            Receive email notifications
+                        </label>
                     </div>
                     <button type="submit" class="save-btn">Save Notification Settings</button>
                 </form>
