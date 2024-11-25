@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile Settings</title>
-    <link rel="stylesheet" href="../assets/css/userProfileCss.css">
+    <link rel="stylesheet" href="../assets/css/settings.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -121,6 +121,6 @@
         &copy; SavvySaver 2024. All rights reserved.
     </footer>
 
-    <script src="../assets/js/UserProfile.js"></script>
+    <script src="../assets/js/settings.js"></script>
 </body>
 </html>
