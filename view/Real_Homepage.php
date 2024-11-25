@@ -15,7 +15,7 @@
   <class="container">
     <!-- Nav -->
     <nav class="main-nav">
-      <img src="assets/images/Savvysaver.png" alt="Savvy Saver Logo" class="logo">
+      <img src="../assets/images/savvy3.png" alt="Savvy Saver Logo" class="logo">
 
       <ul class="main-menu">
         <li><a href="Real_Homepage.php">Home</a></li>
@@ -26,13 +26,64 @@
 
       <ul class="right-menu">
         <li>
-            <a href="#"><i class="fas fa-search"></i></a>
-        </li>
-        <li>
-            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a href="#"><i class="fas fa-bell" id="notification-bell"><span> Notifications </span></i></a>
         </li>
     </ul>
 </nav>
+
+<div id="notification-box">
+    <?php
+    // Include your database connection file
+    require '../db/database.php';
+
+    // Create a connection using mysqli
+    $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); // Replace with your database constants
+
+    // Check connection
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
+    }
+
+    // Fetch closest expiry items
+    $userId = 1; // Assume user ID is 1 (replace with session user ID)
+    $query = "
+        SELECT item_name, expiration_date 
+        FROM food_items 
+        WHERE user_id = ? 
+          AND expiration_date > CURDATE() 
+          AND expiration_date <= DATE_ADD(CURDATE(), INTERVAL 14 DAY)
+        ORDER BY expiration_date ASC 
+        LIMIT 2
+    ";
+
+    $stmt = $mysqli->prepare($query);
+    if ($stmt) {
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $items = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+    } else {
+        echo "<p>Error preparing query: " . $mysqli->error . "</p>";
+        $items = [];
+    }
+
+    $mysqli->close();
+
+    if ($items):
+        echo '<ul>';
+        foreach ($items as $item):
+            echo "<li>{$item['item_name']} (Expires: {$item['expiration_date']})</li>";
+        endforeach;
+        echo '</ul>';
+    else:
+        echo '<p>No items nearing expiry.</p>';
+    endif;
+    ?>
+    <div class="view-all">
+        <a href="notifications.php">View All</a>
+    </div>
+</div>
 
     <!-- Showcase -->
     <header class="showcase">
@@ -141,6 +192,17 @@
       </div>
     </footer>
   </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const bellIcon = document.getElementById('notification-bell');
+    const notifBox = document.getElementById('notification-box');
+
+    bellIcon.addEventListener('click', function () {
+        notifBox.style.display = notifBox.style.display === 'block' ? 'none' : 'block';
+    });
+});
+</script>
 
 </body>
 </html>
