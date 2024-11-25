@@ -7,7 +7,7 @@ if (isset($_POST['task_id'])) {
     $task_id = $_POST['task_id'];
 
     // Delete the task from the database
-    $query_delete = "DELETE FROM tasks WHERE task_id = :task_id";
+    $query_delete = "DELETE FROM team_project_tasks WHERE task_id = :task_id";
     $stmt_delete = $pdo->prepare($query_delete);
     $stmt_delete->bindParam(':task_id', $task_id, PDO::PARAM_INT);
     

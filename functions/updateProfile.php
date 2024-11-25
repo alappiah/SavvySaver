@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Check for email uniqueness
-        $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = ? AND user_id != ?");
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM team_project_users WHERE email = ? AND user_id != ?");
         $stmt->bind_param("si", $email, $userId);
         $stmt->execute();
         $stmt->bind_result($emailCount);
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Update user profile
-        $stmt = $conn->prepare("UPDATE users SET fName = ?, lName = ?, email = ? WHERE user_id = ?");
+        $stmt = $conn->prepare("UPDATE team_project_users SET fName = ?, lName = ?, email = ? WHERE user_id = ?");
         $stmt->bind_param("sssi", $firstName, $lastName, $email, $userId);
 
         if ($stmt->execute()) {

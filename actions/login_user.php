@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
     }
 
     // Query to check if the user exists
-    $checkUserQuery = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $checkUserQuery = $conn->prepare("SELECT * FROM team_project_users WHERE email = ?");
     $checkUserQuery->bind_param("s", $email);
     $checkUserQuery->execute();
     $result = $checkUserQuery->get_result();

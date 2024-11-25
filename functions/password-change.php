@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Fetch the current password from the database
-        $stmt = $conn->prepare("SELECT password FROM users WHERE user_id = ?");
+        $stmt = $conn->prepare("SELECT password FROM team_project_users WHERE user_id = ?");
         $stmt->bind_param("i", $userId);
         $stmt->execute();
         $stmt->bind_result($hashedPassword);
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
         // Update the password in the database
-        $stmt = $conn->prepare("UPDATE users SET password = ? WHERE user_id = ?");
+        $stmt = $conn->prepare("UPDATE team_project_users SET password = ? WHERE user_id = ?");
         $stmt->bind_param("si", $hashedNewPassword, $userId);
 
         if ($stmt->execute()) {

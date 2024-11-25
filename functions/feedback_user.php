@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $createdAt = date('Y-m-d H:i:s');
 
         // Insert query with prepared statements
-        $stmt = $conn->prepare("INSERT INTO feedback (user_id, feedback_text, created_at) VALUES (?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO team_project_feedback (user_id, feedback_text, created_at) VALUES (?, ?, ?)");
         $stmt->bind_param("iss", $userId, $feedback, $createdAt);
 
         if ($stmt->execute()) {

@@ -44,7 +44,7 @@ if (isset($_POST['signUp'])) {
     $currentTime = date('Y-m-d H:i:s');
 
     // Check for duplicate email using prepared statement
-    $checkEmailQuery = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $checkEmailQuery = $conn->prepare("SELECT * FROM team_project_users WHERE email = ?");
     if ($checkEmailQuery === false) {
         die('MySQL prepare error: ' . $conn->error);
     }
@@ -58,7 +58,7 @@ if (isset($_POST['signUp'])) {
         exit();
     } else {
         // Insert user details into the database using prepared statements
-        $insertQuery = $conn->prepare("INSERT INTO users (fname, lname, email, password,created_at) 
+        $insertQuery = $conn->prepare("INSERT INTO team_project_users (fname, lname, email, password,created_at) 
                                        VALUES (?, ?, ?, ?, ?)");
         if ($insertQuery === false) {
             die('MySQL prepare error: ' . $conn->error);
