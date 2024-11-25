@@ -10,7 +10,7 @@ CREATE TABLE team_project_users(
 
 
 -- Create the 'food_items' table
-CREATE TABLE food_items (
+CREATE TABLE team_project_food_items (
     item_id INT AUTO_INCREMENT PRIMARY KEY,          -- Food item ID
     user_id INT,                                     -- User ID (foreign key)
     item_name VARCHAR(100) NOT NULL,                  -- Food item name
@@ -21,7 +21,7 @@ CREATE TABLE food_items (
 );
 
 -- Create the 'notifications' table for food expiration reminders
-CREATE TABLE notifications (
+CREATE TABLE team_project_notifications (
     notification_id INT AUTO_INCREMENT PRIMARY KEY,  -- Notification ID
     user_id INT,                                     -- User ID (foreign key)
     item_id INT,                                     -- Item ID (foreign key)
@@ -41,7 +41,7 @@ CREATE TABLE team_project_recipes (
 );
 
 -- Create the 'recipe_ingredients' table for recipe ingredients
-CREATE TABLE recipe_ingredients (
+CREATE TABLE team_project_recipe_ingredients (
     id INT AUTO_INCREMENT PRIMARY KEY,               -- Ingredient ID
     recipe_id INT,                                    -- Recipe ID (foreign key)
     ingredient_name VARCHAR(100) NOT NULL,            -- Ingredient name
@@ -49,7 +49,7 @@ CREATE TABLE recipe_ingredients (
 );
 
 -- Create the 'feedback' table for user feedback
-CREATE TABLE feedback (
+CREATE TABLE team_project_feedback (
     feedback_id INT AUTO_INCREMENT PRIMARY KEY,      -- Feedback ID
     user_id INT,                                     -- User ID (foreign key)
     feedback_text TEXT NOT NULL,                     -- Feedback content
@@ -58,14 +58,14 @@ CREATE TABLE feedback (
 );
 
 -- Create the 'daily_tips' table for food storage tips
-CREATE TABLE daily_tips (
+CREATE TABLE team_project_daily_tips (
     tip_id INT AUTO_INCREMENT PRIMARY KEY,           -- Tip ID
     tip_text TEXT NOT NULL,                          -- Tip content
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP   -- Timestamp for when the tip was added
 );
 
 -- Create the 'recipe_recommendations' table for recommending recipes to users
-CREATE TABLE recipe_recommendations (
+CREATE TABLE team_project_recipe_recommendations (
     recommendation_id INT AUTO_INCREMENT PRIMARY KEY, -- Recommendation ID
     user_id INT,                                      -- User ID (foreign key)
     recipe_id INT,                                    -- Recipe ID (foreign key)
@@ -74,7 +74,7 @@ CREATE TABLE recipe_recommendations (
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE  -- Link to recipes table
 );
 
-CREATE TABLE tasks (
+CREATE TABLE team_project_tasks (
     task_id INT AUTO_INCREMENT PRIMARY KEY,          -- Task ID
     user_id INT NOT NULL,                            -- User ID (foreign key)
     task_name VARCHAR(255) NOT NULL,                  -- Task name (e.g., food to consume)
@@ -98,7 +98,7 @@ INSERT INTO team_project_users (fName, lName, email, password) VALUES
 ('Mabel', 'Tetteh', 'mabel@gmail.com', 'ahbjfnfng');
 
 -- Insert sample data into 'food_items'
-INSERT INTO food_items (user_id, item_name, expiration_date, quantity) VALUES 
+INSERT INTO team_project_food_items (user_id, item_name, expiration_date, quantity) VALUES 
 (1, 'Rice', '2024-11-10', 2),
 (1, 'Tomatoes', '2024-11-05', 5),
 (2, 'Chicken', '2024-11-12', 1),
@@ -124,7 +124,7 @@ INSERT INTO team_project_recipes (recipe_name, instructions) VALUES
 ('Light Soup', 'Make a soup from fish and spices, served with fufu.');
 
 -- Insert sample data into 'recipe_ingredients'
-INSERT INTO recipe_ingredients (recipe_id, ingredient_name) VALUES
+INSERT INTO team_project_recipe_ingredients (recipe_id, ingredient_name) VALUES
 (1, 'Rice'),
 (1, 'Tomatoes'),
 (1, 'Onions'),
@@ -160,7 +160,7 @@ INSERT INTO recipe_ingredients (recipe_id, ingredient_name) VALUES
 (10, 'Tomatoes');
 
 -- Insert sample data into 'daily_tips'
-INSERT INTO daily_tips (tip_text) VALUES 
+INSERT INTO team_project_daily_tips (tip_text) VALUES 
 ('Check your fridge weekly to prevent spoilage.'),
 ('Store tomatoes at room temperature for better flavor.'),
 ('Keep vegetables in the crisper drawer of your fridge.'),
@@ -173,7 +173,7 @@ INSERT INTO daily_tips (tip_text) VALUES
 ('Learn to cook with leftovers for a delicious meal.');
 
 -- Insert sample data into 'feedback'
-INSERT INTO feedback (user_id, feedback_text) VALUES 
+INSERT INTO team_project_feedback (user_id, feedback_text) VALUES 
 (1, 'Great app! It helped me reduce food waste significantly.'),
 (2, 'I love the recipe suggestions; they are very helpful.'),
 (3, 'The reminder feature is fantastic; I never forget my food.'),
@@ -185,7 +185,7 @@ INSERT INTO feedback (user_id, feedback_text) VALUES
 (9, 'Can we add a feature to track leftovers?');
 
 -- Insert sample data into 'notifications'
-INSERT INTO notifications (user_id, item_id, message) VALUES 
+INSERT INTO team_project_notifications (user_id, item_id, message) VALUES 
 (1, 2, 'Your tomatoes will expire in 3 days!'),
 (2, 1, 'Remember to use your chicken soon!'),
 (3, 6, 'You have eggs that will expire tomorrow!'),
