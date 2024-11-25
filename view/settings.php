@@ -116,7 +116,7 @@
 
     <!-- Footer -->
     <footer>
-        &copy; SavvySaver 2024. All rights reserved.
+        &copy; SavvySaver 2024. All rights reserved
     </footer>
 
     <script src="../assets/js/settings.js"></script>
