@@ -101,3 +101,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.getElementById('email-notifications').addEventListener('change', function () {
+    const isChecked = this.checked;
+
+    fetch('update_notifications.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ emailNotifications: isChecked })
+    })
+        .then(response => response.json())
+        .then(data => {
+            const statusElement = document.getElementById('notification-status');
+            if (data.success) {
+                statusElement.textContent = "Notification preference updated successfully.";
+                statusElement.style.color = "green";
+            } else {
+                statusElement.textContent = "Failed to update notification preference.";
+                statusElement.style.color = "red";
+            }
+        })
+        .catch(error => {
+            console.error('Error updating notification preference:', error);
+        });
+});

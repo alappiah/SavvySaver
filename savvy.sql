@@ -17,7 +17,7 @@ CREATE TABLE team_project_food_items (
     expiration_date DATE NOT NULL,                    -- Expiration date
     quantity INT NOT NULL,                            -- Quantity of the item
     added_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,     -- Date item was added
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE  -- Foreign key to users table
+    FOREIGN KEY (user_id) REFERENCES team_project_users(user_id) ON DELETE CASCADE  -- Foreign key to users table
 );
 
 -- Create the 'notifications' table for food expiration reminders
@@ -28,8 +28,8 @@ CREATE TABLE team_project_notifications (
     message VARCHAR(255) NOT NULL,                    -- Notification message
     sent_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,      -- Date and time the notification was sent
     seen BOOLEAN DEFAULT FALSE,                       -- Whether the notification has been read
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,  -- Link to users table
-    FOREIGN KEY (item_id) REFERENCES food_items(item_id) ON DELETE CASCADE  -- Link to food_items table
+    FOREIGN KEY (user_id) REFERENCES team_project_users(user_id) ON DELETE CASCADE,  -- Link to users table
+    FOREIGN KEY (item_id) REFERENCES team_project_food_items(item_id) ON DELETE CASCADE  -- Link to food_items table
 );
 
 -- Create the 'recipes' table
@@ -45,7 +45,7 @@ CREATE TABLE team_project_recipe_ingredients (
     id INT AUTO_INCREMENT PRIMARY KEY,               -- Ingredient ID
     recipe_id INT,                                    -- Recipe ID (foreign key)
     ingredient_name VARCHAR(100) NOT NULL,            -- Ingredient name
-    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE  -- Link to recipes table
+    FOREIGN KEY (recipe_id) REFERENCES team_project_recipes(recipe_id) ON DELETE CASCADE  -- Link to recipes table
 );
 
 -- Create the 'feedback' table for user feedback
@@ -54,7 +54,7 @@ CREATE TABLE team_project_feedback (
     user_id INT,                                     -- User ID (foreign key)
     feedback_text TEXT NOT NULL,                     -- Feedback content
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp of feedback submission
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE  -- Link to users table
+    FOREIGN KEY (user_id) REFERENCES team_project_users(user_id) ON DELETE CASCADE  -- Link to users table
 );
 
 -- Create the 'daily_tips' table for food storage tips
@@ -70,8 +70,8 @@ CREATE TABLE team_project_recipe_recommendations (
     user_id INT,                                      -- User ID (foreign key)
     recipe_id INT,                                    -- Recipe ID (foreign key)
     recommended_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Timestamp for the recommendation
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,  -- Link to users table
-    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE  -- Link to recipes table
+    FOREIGN KEY (user_id) REFERENCES team_project_users(user_id) ON DELETE CASCADE,  -- Link to users table
+    FOREIGN KEY (recipe_id) REFERENCES team_project_recipes(recipe_id) ON DELETE CASCADE  -- Link to recipes table
 );
 
 CREATE TABLE team_project_tasks (
@@ -83,7 +83,7 @@ CREATE TABLE team_project_tasks (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   -- Task creation timestamp
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Last update timestamp
     due_date DATETIME,                               -- Optional due date for tasks
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE  -- Link to users table
+    FOREIGN KEY (user_id) REFERENCES team_project_users(user_id) ON DELETE CASCADE  -- Link to users table
 );
 
 INSERT INTO team_project_users (fName, lName, email, password) VALUES
