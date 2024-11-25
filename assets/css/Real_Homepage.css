@@ -38,8 +38,11 @@ ul {
 }
 
 .main-nav .logo {
-  width: 110px;
+  height: 40px; /* Adjust to make it small enough */
+  width: auto; /* Maintain aspect ratio */
+  margin-right: 15px; /* Space between logo and menu */
 }
+
 
 .main-nav ul {
   display: flex;
@@ -314,6 +317,40 @@ ul {
 .auth-buttons .btn:hover {
   background-color: #b7c035; /* Hover effect color */
   box-shadow: 0 0 5px #ffcc00;
+}
+
+#notification-box {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 5px;
+  width: 250px;
+  z-index: 100;
+}
+
+#notification-box ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#notification-box ul li {
+  margin: 10px 0;
+}
+
+#notification-box .view-all {
+  text-align: center;
+  margin-top: 10px;
+}
+
+#notification-box .view-all a {
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /* Media Queries */
