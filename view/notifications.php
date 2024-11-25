@@ -4,18 +4,37 @@ require '../db/database.php'; // Adjust the path as needed
 
 // Start session to handle logged-in user
 session_start();
-$user_id = 1; // Replace with your session variable for the user, for example $_SESSION['user_id']
+$user_id = 1; // Replace with your session variable for the user, e.g., $_SESSION['user_id']
+
+// Create a connection using mysqli
+$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); // Replace with your database constants
+
+// Check connection
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+}
 
 // Fetch the list of food items that are nearing expiration for the logged-in user
 $query = "SELECT item_name, expiration_date 
           FROM food_items 
-          WHERE user_id = :user_id 
+          WHERE user_id = ? 
           AND expiration_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 14 DAY) 
           ORDER BY expiration_date ASC";
-$stmt = $pdo->prepare($query);
-$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-$stmt->execute();
-$food_notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$stmt = $mysqli->prepare($query);
+if ($stmt) {
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $food_notifications = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+} else {
+    echo "Error preparing the query: " . $mysqli->error;
+    $food_notifications = [];
+}
+
+// Close the connection
+$mysqli->close();
 ?>
 
 <!DOCTYPE html>
@@ -39,17 +58,11 @@ $food_notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <!-- Dashboard Navigation -->
             <ul class="dashboard-nav">
                 <li class="dashboard-nav__item"><a href="../view/Real_Homepage.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Home">Home</a></li>
-                <!-- Daily Tips Nav Item -->
                 <li class="dashboard-nav__item"><a href="../view/daily_tips.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_home.svg" alt="Daily Tips">Daily Tips</a></li>
-                <!-- Recipe Recommendations Nav Item -->
                 <li class="dashboard-nav__item"><a href="../view/recipe_recommendation.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_home.svg" alt="Recipe Recommendations">Recipe Recommendations</a></li>
-                <!-- Notifications Nav Item -->
                 <li class="dashboard-nav__item"><a href="../view/notifications.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_notifications.svg" alt="Notifications">Notifications</a></li>
-                <!-- Food Inventory Nav Item -->
                 <li class="dashboard-nav__item"><a href="../view/inventory.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_my_trip.svg" alt="Food Inventory">Food Inventory</a></li>
-                <!-- Recipes Nav Item -->
                 <li class="dashboard-nav__item"><a href="../view/recipes.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Recipes">Recipes</a></li>
-                <!-- Recipes Nav Item -->
                 <li class="dashboard-nav__item"><a href="../view/Tasks.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Home">Tasks</a></li>
             </ul>
         </div>
@@ -58,11 +71,9 @@ $food_notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="dashboard-content">
             <!-- Dashboard Header -->
             <div class="dashboard-header">
-                <!-- Search Input -->
                 <div class="dashboard-header__search">
                     <input type="search" placeholder="Search...">
                 </div>
-                <!-- New Plan Icon -->
                 <div class="dashboard-header__new">
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_new_plan.svg" alt="New Plan">
                 </div>
@@ -70,19 +81,18 @@ $food_notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <!-- Dashboard Content Panels -->
             <div class="dashboard-list">
-    <!-- Display Food Expiration Notifications -->
-    <?php foreach ($food_notifications as $notification): ?>
-        <div class="dashboard-list__item">
-            <h2><?php echo "'" . htmlspecialchars($notification['item_name']) . "' expires by " . htmlspecialchars($notification['expiration_date']); ?></h2>
-        </div>
-    <?php endforeach; ?>
+                <!-- Display Food Expiration Notifications -->
+                <?php foreach ($food_notifications as $notification): ?>
+                    <div class="dashboard-list__item">
+                        <h2><?php echo "'" . htmlspecialchars($notification['item_name']) . "' expires by " . htmlspecialchars($notification['expiration_date']); ?></h2>
+                    </div>
+                <?php endforeach; ?>
 
-    <?php if (empty($food_notifications)): ?>
-        <div class="dashboard-list__item">
-            <h2>No upcoming food expiration notifications.</h2>
-        </div>
-    <?php endif; ?>
-</div>
+                <?php if (empty($food_notifications)): ?>
+                    <div class="dashboard-list__item">
+                        <h2>No upcoming food expiration notifications.</h2>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
