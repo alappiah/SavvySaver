@@ -19,9 +19,7 @@
 
       <ul class="main-menu">
         <li><a href="Real_Homepage.php">Home</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="userProfile.php">Profile</a></li>
+        <li><a href="settings.php">Settings</a></li>
       </ul>
 
       <ul class="right-menu">
