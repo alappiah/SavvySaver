@@ -51,7 +51,7 @@
 
             <section id="notification-settings" class="section-content">
                 <h2>Notification Settings</h2>
-                <form id="notification-settings-form">
+                <form id="notification-settings-form" action="../functions/update_notifications.php" method="POST">
                     <div class="form-group">
                         <label for="email-notifications">
                             <input type="checkbox" id="email-notifications" name="emailNotifications" checked>

@@ -16,8 +16,8 @@ $user_id = $_SESSION['user_id']; // Replace with your session variable for the u
 if ($conn) {
     // Fetch 3 random recipe recommendations for the user, joining with the recipes table
     $query = "SELECT r.recipe_name, r.instructions, rr.recommended_on
-              FROM recipe_recommendations rr
-              JOIN recipes r ON rr.recipe_id = r.recipe_id
+              FROM team_project_recipe_recommendations rr
+              JOIN team_project_recipes r ON rr.recipe_id = r.recipe_id
               WHERE rr.user_id = ?
               ORDER BY rr.recommended_on DESC
               LIMIT 3"; // Adjusted to fetch based on the latest recommendations

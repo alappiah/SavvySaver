@@ -7,7 +7,7 @@ session_start();
 $user_id = $_SESSION['user_id']; // Replace with your session variable for the user
 
 // Fetch all recipes from the database using mysqli
-$query = "SELECT recipe_id, recipe_name, instructions FROM recipes ORDER BY recipe_name";
+$query = "SELECT recipe_id, recipe_name, instructions FROM team_project_recipes ORDER BY recipe_name";
 $result = $conn->query($query); // Use mysqli's query method
 
 // Check if there are any recipes returned
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Ensure recipe_name and instructions are not empty
     if (!empty($recipe_name) && !empty($instructions)) {
         // Insert the new recipe into the database
-        $insert_query = "INSERT INTO recipes (recipe_name, instructions) VALUES (?, ?)";
+        $insert_query = "INSERT INTO team_project_recipes (recipe_name, instructions) VALUES (?, ?)";
         $stmt = $conn->prepare($insert_query); // Prepare the statement
 
         // Bind parameters (s = string, s = string)

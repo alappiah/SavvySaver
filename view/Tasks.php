@@ -7,7 +7,7 @@ session_start();
 $user_id = $_SESSION['user_id']; // Replace with your session variable for the user
 
 // Fetch all tasks from the database where is_completed is 0 (not completed)
-$query = "SELECT task_id, task_name, task_description FROM tasks WHERE user_id = ? AND is_completed = 0 ORDER BY task_name";
+$query = "SELECT task_id, task_name, task_description FROM team_project_tasks WHERE user_id = ? AND is_completed = 0 ORDER BY task_name";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id); // "i" denotes that user_id is an integer
 $stmt->execute();
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Ensure task_name and task_description are not empty
     if (!empty($task_name) && !empty($task_description)) {
         // Insert the new task into the database
-        $insert_query = "INSERT INTO tasks (user_id, task_name, task_description) VALUES (?, ?, ?)";
+        $insert_query = "INSERT INTO team_project_tasks (user_id, task_name, task_description) VALUES (?, ?, ?)";
         $insert_stmt = $conn->prepare($insert_query);
         $insert_stmt->bind_param("iss", $user_id, $task_name, $task_description); // "i" for integer, "s" for string
         $insert_stmt->execute();

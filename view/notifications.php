@@ -4,24 +4,19 @@ require '../db/database.php'; // Adjust the path as needed
 
 // Start session to handle logged-in user
 session_start();
-$user_id = 1; // Replace with your session variable for the user, e.g., $_SESSION['user_id']
+$user_id = $_SESSION['user_id']; // Replace with your session variable for the user, e.g., $_SESSION['user_id']
 
-// Create a connection using mysqli
-$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); // Replace with your database constants
 
-// Check connection
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
-}
+
 
 // Fetch the list of food items that are nearing expiration for the logged-in user
 $query = "SELECT item_name, expiration_date 
-          FROM food_items 
+          FROM team_project_food_items 
           WHERE user_id = ? 
           AND expiration_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 14 DAY) 
           ORDER BY expiration_date ASC";
 
-$stmt = $mysqli->prepare($query);
+$stmt = $conn->prepare($query);
 if ($stmt) {
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
@@ -29,12 +24,12 @@ if ($stmt) {
     $food_notifications = $result->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
 } else {
-    echo "Error preparing the query: " . $mysqli->error;
+    echo "Error preparing the query: " . $conn->error;
     $food_notifications = [];
 }
 
 // Close the connection
-$mysqli->close();
+$conn->close();
 ?>
 
 <!DOCTYPE html>

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quantity = $_POST['quantity'];
 
     // Prepare the SQL query to insert data into the database using mysqli
-    $query = "INSERT INTO food_items (user_id, item_name, expiration_date, quantity, added_on) 
+    $query = "INSERT INTO team_project_food_items (user_id, item_name, expiration_date, quantity, added_on) 
               VALUES (?, ?, ?, ?, NOW())";
     
     // Prepare statement
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Fetch the list of food items for the logged-in user
-$query = "SELECT * FROM food_items WHERE user_id = ? ORDER BY added_on DESC";
+$query = "SELECT * FROM team_project_food_items WHERE user_id = ? ORDER BY added_on DESC";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id); // Bind the user_id as an integer
 $stmt->execute();

@@ -12,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
     // Create the connection (assuming $conn is your MySQLi connection)
     
     // Fetch all tasks for the logged-in user from the database using MySQLi
-    $query_tasks = "SELECT task_id, task_name, task_description, due_date, is_completed FROM tasks WHERE user_id = ? ORDER BY due_date";
+    $query_tasks = "SELECT task_id, task_name, task_description, due_date, is_completed FROM team_project_tasks WHERE user_id = ? ORDER BY due_date";
     if ($stmt_tasks = $conn->prepare($query_tasks)) {
         $stmt_tasks->bind_param("i", $user_id); // Bind the user_id parameter as an integer
         $stmt_tasks->execute();
@@ -25,7 +25,7 @@ if (isset($_SESSION['user_id'])) {
     }
 
     // Fetch the latest two tips from the database
-    $query_tips = "SELECT tip_text FROM daily_tips ORDER BY created_at DESC LIMIT 2";
+    $query_tips = "SELECT tip_text FROM team_project_daily_tips ORDER BY created_at DESC LIMIT 2";
     $result_tips = $conn->query($query_tips);
     if ($result_tips) {
         $tips = $result_tips->fetch_all(MYSQLI_ASSOC);
