@@ -15,7 +15,7 @@
   <class="container">
     <!-- Nav -->
     <nav class="main-nav">
-      <img src="assets/images/Savvysaver.png" alt="Savvy Saver Logo" class="logo">
+      <img src="assets/images/savvy3.png" alt="Savvy Saver Logo" class="logo">
 
       <ul class="main-menu">
         <li><a href="index.php">Home</a></li>
