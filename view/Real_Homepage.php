@@ -24,7 +24,7 @@ if (isset($_SESSION['user_id'])) {
     $result = $stmt->get_result();
 
     // Output the result inside the notification box
-    echo '<div id="notification-box">';
+    echo '<div id="notification-box" style="display: none; position: absolute; background: #fff; border: 1px solid #ccc; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); width: 300px;">';
     if ($result->num_rows > 0) {
         echo '<ul>';
         while ($item = $result->fetch_assoc()) {
@@ -34,6 +34,9 @@ if (isset($_SESSION['user_id'])) {
     } else {
         echo '<p>No items nearing expiry.</p>';
     }
+    echo '<div style="text-align: center; margin-top: 10px;">
+            <a href="notifications.php" style="text-decoration: none; color: #007BFF; font-weight: bold;">View All</a>
+          </div>';
     echo '</div>';
 
     $stmt->close(); // Close the statement
@@ -48,7 +51,7 @@ if (isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Savvy Saver</title>
-     <!-- Link to external CSS file -->
+     
      <link rel="stylesheet" href="../assets/css/Real_Homepage.css">
     
     <!-- Add Font Awesome -->
@@ -62,9 +65,7 @@ if (isset($_SESSION['user_id'])) {
 
       <ul class="main-menu">
         <li><a href="Real_Homepage.php">Home</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="userProfile.php">Profile</a></li>
+        <li><a href="settings.php">Settings</a></li>
       </ul>
 
       <ul class="right-menu">
@@ -96,7 +97,6 @@ if (isset($_SESSION['user_id'])) {
   <div class="showcase-text">
     <h2>SAVVY SAVER</h2>
     <p>Minimize Waste, Maximize Taste.</p>
-    <a href="#" class="btn">Get Started <i class="fas fa-chevron-right"></i></a>
   </div>
 </header>
 
