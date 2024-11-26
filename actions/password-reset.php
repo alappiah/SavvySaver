@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = $result->fetch_assoc();
             $user_id = $user['user_id'];
             $token = bin2hex(random_bytes(16)); // Generate a secure random token
-            $expires_at = date('Y-m-d H:i:s', strtotime('+1 hour')); // Token valid for 1 hour
+            $expires_at = date('Y-m-d H:i:s', strtotime('+10 minutes')); // Token valid for 10 minutes
 
             // Save the token and its expiry in the database
             $insertTokenQuery = "INSERT INTO team_project_password_reset_tokens (user_id, token, expires_at) 
@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $mail->Subject = 'Password Reset Token';
                     $mail->Body = "<p>Here is your password reset token:</p>
                                    <h3>$token</h3>
-                                   <p>The token is valid for 1 hour. Please use it to reset your password.</p>";
-                    $mail->AltBody = "Here is your password reset token: $token. The token is valid for 1 hour.";
+                                   <p>The token is valid for 10 minutes. Please use it to reset your password.</p>";
+                    $mail->AltBody = "Here is your password reset token: $token. The token is valid for 10 minutes.";
 
                     $mail->send();
                     echo "<script>

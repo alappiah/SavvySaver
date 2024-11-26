@@ -14,7 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            // Token is valid
+            // Token is valid, allow user to reset their password
+            $user = $result->fetch_assoc();
+            $user_id = $user['user_id'];
+
+            // Display password reset form
             echo "<script>
                     alert('Token verified! Redirecting to password reset page...');
                     window.location.href = 'reset_password.php?token=" . urlencode($token) . "';
