@@ -157,12 +157,13 @@ We’d like to thank the following contributors for their valuable input and eff
  - Designed and implemented the backend for the homepage. Developed functionalities for adding food items, recipes, and tasks,
  - Designed logic for marking tasks as completed.
  - Added a feature to display a snippet of notifications without navigating to the dashboard.
+ - Designed the frontend for the password reset feature
 
 
 **[Alvin Appiah](https://github.com/alappiah)** 
 - Designed the frontend layout for the **Login** and **Signup** pages.
 - Implemented the **Email Notification** feature. 
-- Developed backend logic for **User Feedback**, **Profile Updates**, and **Password Changes**.
+- Developed backend logic for **User Feedback**, **Profile Updates**, and **Password Change Feature**.
 
 **[Elizabeth Avevor](https://github.com/Afful-yayra156)** 
 - Created the project **Storyboard** 
