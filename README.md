@@ -87,7 +87,7 @@ Ensure you have the following installed:
    ```
 
 2. Import the database:  
-   - Import the `savvy_saver.sql` file located in the `database/` folder into your MySQL server.
+   - Import the `savvy_saver.sql` file located in the main folder into your MySQL server.
 
 3. Configure the database connection:  
    - Open `db/database.php` and update the following fields:
@@ -99,9 +99,9 @@ Ensure you have the following installed:
      ```
 
 4. Start the application:  
-   - Launch your local server and access the application at:  
+   - Launch your local server access the application using Apache/Myphpadmin by:  
      ```
-     http://localhost/SavvySaver
+     http://localhost/SavvySaver-main/
      ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -152,7 +152,7 @@ SavvySaver/
 
 We’d like to thank the following contributors for their valuable input and effort in building **Savvy Saver**:  
 
- **[Thomas Parker](https://github.com/ThomasParkerr)** |
+ **[Thomas Parker](https://github.com/ThomasParkerr)**
  -  Implemented the frontend and backend for the Dashboard and all its sub-pages, including **Recipe Recommendations**, **Daily Tips**, **Notifications**, **Food Inventory**, **Recipes**, and **Tasks**.
  - Designed and implemented the backend for the homepage. Developed functionalities for adding food items, recipes, and tasks,
  - Designed logic for marking tasks as completed.
@@ -176,7 +176,7 @@ We’d like to thank the following contributors for their valuable input and eff
 
 ## Contact
 
-Your Name - [your-email@example.com](mailto:your-email@example.com)  
+Your Name - [thomasparkerais@gmail.com](mailto:your-email@example.com)  
 
 Project Link: [https://github.com/alappiah/SavvySaver](https://github.com/alappiah/SavvySaver)  
 
