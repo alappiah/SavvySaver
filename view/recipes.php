@@ -6,46 +6,91 @@ include('../db/database.php'); // Adjust the path as needed
 session_start();
 $user_id = $_SESSION['user_id']; // Replace with your session variable for the user
 
-// Fetch all recipes from the database using mysqli
-$query = "SELECT recipe_id, recipe_name, instructions FROM team_project_recipes ORDER BY recipe_name";
-$result = $conn->query($query); // Use mysqli's query method
+// Initialize the search term
+$search = isset($_GET['search']) ? $_GET['search'] : '';
 
-// Check if there are any recipes returned
-if ($result) {
-    $recipes = $result->fetch_all(MYSQLI_ASSOC); // Fetch all rows as an associative array
-} else {
-    $recipes = []; // Set empty array if no recipes are found
-}
+// SQL query to fetch recipes based on the search term
+$query = "SELECT recipe_id, recipe_name, instructions 
+          FROM team_project_recipes 
+          WHERE recipe_name LIKE ? OR instructions LIKE ? 
+          ORDER BY recipe_name";
+$stmt = $conn->prepare($query);
+
+// Bind parameters (with % for partial matching in SQL)
+$search_term = "%" . $search . "%"; // Adding % for wildcard search
+$stmt->bind_param("ss", $search_term, $search_term); // "s" for string
+$stmt->execute();
+$result = $stmt->get_result();
+$recipes = $result->fetch_all(MYSQLI_ASSOC);
 
 // Handle form submission to create a new recipe
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $recipe_name = $_POST['recipe-title'];
-    $instructions = $_POST['instructions'];
+    // Check if it's a request to add a new recipe
+    if (isset($_POST['recipe-title']) && isset($_POST['instructions'])) {
+        $recipe_name = $_POST['recipe-title'];
+        $instructions = $_POST['instructions'];
 
-    // Ensure recipe_name and instructions are not empty
-    if (!empty($recipe_name) && !empty($instructions)) {
-        // Insert the new recipe into the database
-        $insert_query = "INSERT INTO team_project_recipes (recipe_name, instructions) VALUES (?, ?)";
-        $stmt = $conn->prepare($insert_query); // Prepare the statement
+        // Ensure recipe_name and instructions are not empty
+        if (!empty($recipe_name) && !empty($instructions)) {
+            // Insert the new recipe into the database
+            $insert_query = "INSERT INTO team_project_recipes (recipe_name, instructions) VALUES (?, ?)";
+            $stmt = $conn->prepare($insert_query); // Prepare the statement
 
-        // Bind parameters (s = string, s = string)
-        $stmt->bind_param("ss", $recipe_name, $instructions);
+            // Bind parameters (s = string, s = string)
+            $stmt->bind_param("ss", $recipe_name, $instructions);
 
-        // Execute the query
+            // Execute the query
+            if ($stmt->execute()) {
+                // Redirect to the same page after submission to avoid resubmission
+                header("Location: {$_SERVER['PHP_SELF']}");
+                exit();
+            } else {
+                // Handle the error if insertion fails
+                echo "Error adding recipe: " . $stmt->error;
+            }
+
+            // Close the statement
+            $stmt->close();
+        } else {
+            // Handle the error if fields are empty
+            echo "Both recipe name and instructions are required!";
+        }
+    }
+
+    // Handle recipe deletion
+    if (isset($_POST['delete_recipe_id'])) {
+        $recipe_id = $_POST['delete_recipe_id'];
+        $delete_query = "DELETE FROM team_project_recipes WHERE recipe_id = ?";
+        $stmt = $conn->prepare($delete_query);
+        $stmt->bind_param("i", $recipe_id);
+
         if ($stmt->execute()) {
-            // Redirect to the same page after submission to avoid resubmission
+            // Redirect to refresh the page after deletion
             header("Location: {$_SERVER['PHP_SELF']}");
             exit();
         } else {
-            // Handle the error if insertion fails
-            echo "Error adding recipe: " . $stmt->error;
+            echo "Error deleting recipe: " . $stmt->error;
         }
-
-        // Close the statement
         $stmt->close();
-    } else {
-        // Handle the error if fields are empty
-        echo "Both recipe name and instructions are required!";
+    }
+
+    // Handle recipe editing
+    if (isset($_POST['edit_recipe_id']) && isset($_POST['edited_recipe_name']) && isset($_POST['edited_instructions'])) {
+        $recipe_id = $_POST['edit_recipe_id'];
+        $edited_recipe_name = $_POST['edited_recipe_name'];
+        $edited_instructions = $_POST['edited_instructions'];
+
+        $update_query = "UPDATE team_project_recipes SET recipe_name = ?, instructions = ? WHERE recipe_id = ?";
+        $stmt = $conn->prepare($update_query);
+        $stmt->bind_param("ssi", $edited_recipe_name, $edited_instructions, $recipe_id);
+
+        if ($stmt->execute()) {
+            header("Location: {$_SERVER['PHP_SELF']}");
+            exit();
+        } else {
+            echo "Error updating recipe: " . $stmt->error;
+        }
+        $stmt->close();
     }
 }
 ?>
@@ -70,13 +115,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <!-- Dashboard Navigation -->
             <ul class="dashboard-nav">
-                <li class="dashboard-nav__item"><a href="../view/Real_Homepage.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Home">Home</a></li>
-                <li class="dashboard-nav__item"><a href="../view/daily_tips.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_home.svg" alt="Daily Tips">Daily Tips</a></li>
-                <li class="dashboard-nav__item"><a href="../view/recipe_recommendation.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_home.svg" alt="Recipe Recommendations">Recipe Recommendations</a></li>
-                <li class="dashboard-nav__item"><a href="../view/notifications.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_notifications.svg" alt="Notifications">Notifications</a></li>
-                <li class="dashboard-nav__item"><a href="../view/inventory.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_my_trip.svg" alt="Food Inventory">Food Inventory</a></li>
-                <li class="dashboard-nav__item"><a href="../view/recipes.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Recipes">Recipes</a></li>
-                <li class="dashboard-nav__item"><a href="../view/Tasks.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Tasks">Tasks</a></li>
+                <li class="dashboard-nav__item"><a href="../view/Real_Homepage.php">Home</a></li>
+                <li class="dashboard-nav__item"><a href="../view/daily_tips.php">Daily Tips</a></li>
+                <li class="dashboard-nav__item"><a href="../view/recipe_recommendation.php">Recipe Recommendations</a></li>
+                <li class="dashboard-nav__item"><a href="../view/notifications.php">Notifications</a></li>
+                <li class="dashboard-nav__item"><a href="../view/inventory.php">Food Inventory</a></li>
+                <li class="dashboard-nav__item"><a href="../view/recipes.php">Recipes</a></li>
+                <li class="dashboard-nav__item"><a href="../view/Tasks.php">Tasks</a></li>
             </ul>
         </div>
 
@@ -85,7 +130,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <!-- Dashboard Header -->
             <div class="dashboard-header">
                 <div class="dashboard-header__search">
-                    <input type="search" placeholder="Search...">
+                    <form method="GET" action="">
+                        <input type="search" name="search" placeholder="Search tasks..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                    </form>
                 </div>
                 <div class="dashboard-header__new">
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_new_plan.svg" alt="New Plan">
@@ -93,38 +140,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
 
             <!-- Dashboard Content Panels -->
-            <div class="dashboard-content__panel dashboard-content__panel--active" data-panel-id="tasks">
+            <div class="dashboard-content__panel dashboard-content__panel--active" data-panel-id="recipes">
                 <div class="dashboard-list">
-                    <!-- Display first recipe dynamically -->
+                    <!-- Display recipes dynamically -->
                     <?php if (!empty($recipes)): ?>
-                        <div class="dashboard-list__item">
-                            <h2><?php echo htmlspecialchars($recipes[0]['recipe_name']); ?></h2>
-                            <span><?php echo htmlspecialchars($recipes[0]['instructions'] ?? 'No instructions available'); ?></span>
-                        </div>
-
-                        <!-- Display the rest of the recipes dynamically -->
-                        <?php for ($i = 1; $i < count($recipes); $i++): ?>
+                        <?php foreach ($recipes as $recipe): ?>
                             <div class="dashboard-list__item">
-                                <h2><?php echo htmlspecialchars($recipes[$i]['recipe_name']); ?></h2>
-                                <span><?php echo htmlspecialchars($recipes[$i]['instructions'] ?? 'No instructions available'); ?></span>
+                                <h2><?php echo htmlspecialchars($recipe['recipe_name']); ?></h2>
+                                <span><?php echo htmlspecialchars($recipe['instructions'] ?? 'No instructions available'); ?></span>
+                                
+                                <!-- Delete Button -->
+                                <form action="" method="POST" style="display:inline;">
+                                    <input type="hidden" name="delete_recipe_id" value="<?php echo $recipe['recipe_id']; ?>">
+                                    <button type="submit">Delete</button>
+                                </form>
+
+                                <!-- Edit Button -->
+                                <button class="edit-recipe-btn" onclick="editRecipe(<?php echo $recipe['recipe_id']; ?>, '<?php echo addslashes($recipe['recipe_name']); ?>', '<?php echo addslashes($recipe['instructions']); ?>')">Edit</button>
                             </div>
-                        <?php endfor; ?>
+                        <?php endforeach; ?>
                     <?php else: ?>
                         <div class="dashboard-list__item dashboard-list__item--placeholder">
-                            <h2>No recipes available</h2>
-                            <span>Start adding your favorite recipes to see them here.</span>
+                            <h2>No recipes found</h2>
+                            <span>Try a different search term or add a new recipe.</span>
                         </div>
                     <?php endif; ?>
                 </div>
             </div>
 
-            <!-- Create Recipe Button -->
-            <div class="create-task">
-                <button id="create-recipe-btn">Create Recipe</button>
+            <!-- Recipe Editing Form (hidden by default) -->
+            <div id="edit-recipe-form" style="display: none;">
+                <form action="" method="POST">
+                    <input type="hidden" id="edit-recipe-id" name="edit_recipe_id">
+                    <label for="edited-recipe-name">Recipe Name:</label>
+                    <input type="text" id="edited-recipe-name" name="edited_recipe_name" required>
+                    <label for="edited-instructions">Instructions:</label>
+                    <textarea id="edited-instructions" name="edited_instructions" required></textarea>
+                    <button type="submit">Update Recipe</button>
+                </form>
             </div>
 
-            <!-- Recipe Creation Form (hidden by default) -->
-            <div id="create-recipe-form" style="display: none;">
+            <div id="create-recipe-form">
                 <form action="" method="POST">
                     <label for="recipe-title">Recipe Name:</label>
                     <input type="text" id="recipe-title" name="recipe-title" required>
@@ -133,15 +189,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <button type="submit">Create Recipe</button>
                 </form>
             </div>
+
+            <script>
+                function editRecipe(id, name, instructions) {
+                    // Fill the form with the current recipe data
+                    document.getElementById('edit-recipe-id').value = id;
+                    document.getElementById('edited-recipe-name').value = name;
+                    document.getElementById('edited-instructions').value = instructions;
+
+                    // Show the edit form
+                    document.getElementById('edit-recipe-form').style.display = 'block';
+                }
+            </script>
         </div>
     </div>
-
-    <script>
-        // Toggle Recipe Creation Form
-        document.getElementById('create-recipe-btn').addEventListener('click', function() {
-            var form = document.getElementById('create-recipe-form');
-            form.style.display = form.style.display === 'none' ? 'block' : 'none';
-        });
-    </script>
 </body>
 </html>
