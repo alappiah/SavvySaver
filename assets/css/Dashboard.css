@@ -307,7 +307,7 @@ form input, form textarea {
 
 form button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #514caf;
   color: white;
   border: none;
   border-radius: 5px;
@@ -315,7 +315,7 @@ form button {
 }
 
 form button:hover {
-  background-color: #45a049;
+  background-color: #4562a0;
 }
 
 /* Task List */
@@ -323,7 +323,7 @@ form button:hover {
 .create-task-btn {
   display: inline-block;
   padding: 12px 24px;
-  background-color: #FF5733; /* Matching the primary color */
+  background-color: #33a7ff; /* Matching the primary color */
   color: var(--white);
   font-size: 1rem;
   font-weight: bold;
@@ -336,7 +336,7 @@ form button:hover {
 }
 
 .create-task-btn:hover {
-  background-color: #e74c3c; /* Darken on hover */
+  background-color: #3c59e7; /* Darken on hover */
 }
 
 /* Create Task Form */
@@ -360,7 +360,7 @@ form input, form textarea {
 
 form button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #4c75af;
   color: white;
   border: none;
   border-radius: 5px;
@@ -368,7 +368,7 @@ form button {
 }
 
 form button:hover {
-  background-color: #45a049;
+  background-color: #456fa0;
 }
 
 /* Create Task Button Container */
@@ -447,13 +447,13 @@ form button:hover {
 #create-recipe-btn:focus {
   outline: none; /* Remove default focus outline */
   border-color: #23a1af; /* Match the button's background */
-  box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.5); /* Custom focus outline */
+  box-shadow: 0 0 0 3px rgba(51, 197, 255, 0.5);; /* Custom focus outline */
 }
 
 /* Accessible Focus State */
 #create-recipe-btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.5); /* Visible outline when focused */
+  box-shadow: 0 0 0 3px rgba(51, 197, 255, 0.5);; /* Visible outline when focused */
 }
 
 /* Create Item Button */
@@ -486,12 +486,81 @@ form button:hover {
 #create-item-btn:focus {
   outline: none; /* Remove default focus outline */
   border-color: #23a1af; /* Match the button's background */
-  box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.5); /* Custom focus outline */
+  box-shadow: 0 0 0 3px rgba(51, 197, 255, 0.5);; /* Custom focus outline */
 }
 
 /* Accessible Focus State */
 #create-item-btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.5); /* Visible outline when focused */
+  box-shadow: 0 0 0 3px rgba(51, 197, 255, 0.5); /* Visible outline when focused */
+}
+/* Style the Edit button */
+/* Style the Edit button */
+.edit-recipe-btn {
+  background-color: #4c81af; /* Green background */
+  color: white; /* White text color */
+  padding: 8px 15px; /* Padding for size */
+  font-size: 16px; /* Font size for text */
+  border: none; /* No border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor when hovering */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transition effect for smooth hover and click */
+  margin-left: 10px; /* Space between the delete button and edit button */
 }
 
+/* Add hover effect */
+.edit-recipe-btn:hover {
+  background-color: #4577a0; /* Darker green on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Focus effect */
+.edit-recipe-btn:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 3px rgba(0, 102, 127, 0.5); /* Green outline on focus */
+}
+
+/* Disabled button style */
+.edit-recipe-btn:disabled {
+  background-color: #ccc; /* Light grey for disabled */
+  cursor: not-allowed; /* Change cursor to indicate button is disabled */
+}
+
+.edit-item-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-item-btn:hover {
+  background-color: #2980b9;
+}
+
+.edit-item-btn:focus {
+  outline: none;
+}
+
+/* Delete Button Styling */
+.delete-item-btn {
+  background-color: #2bb1c0;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-item-btn:hover {
+  background-color: #2bb1c0;
+}
+
+.delete-item-btn:focus {
+  outline: none;
+}
