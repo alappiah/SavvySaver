@@ -72,6 +72,7 @@ if (isset($_SESSION['user_id'])) {
         <li>
             <a href="#"><i class="fas fa-bell" id="notification-bell"><span> Notifications </span></i></a>
         </li>
+        <li><h4><a href="../actions/logout.php" onclick="return confirm('Are you sure you want to log out?')">Logout</a></h4></li>
     </ul>
 </nav>
 
