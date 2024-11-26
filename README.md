@@ -162,19 +162,26 @@ We’d like to thank the following contributors for their valuable input and eff
 
 **[Alvin Appiah](https://github.com/alappiah)** 
 - Designed the frontend layout for the **Login** and **Signup** pages.
+- Implemented the backend for the **Login** and **Signup** pages.
 - Implemented the **Email Notification** feature. 
 - Developed backend logic for **User Feedback**, **Profile Updates**, and **Password Change Feature**.
+- Design backend logic for **forgotten password**
+- Implement backend for **settings**. Ability to change first name, last name, email and password. Design a backend for whether the user want to receive email notifications or not. Designed backend to save user feedback
+- Implement logout feature
 
 **[Elizabeth Avevor](https://github.com/Afful-yayra156)** 
 - Created the project **Storyboard** 
 - Assisted in selecting the website's pages. 
 - Updated the frontend for three pages, including the **Settings Page**
 - Improved the **Login** and **Signup** pages.
-- Designed the Database 
+- Designed the Database
+- Designed slides for presentation
+- Was the team lead
 
 **[Joel Ackam](https://github.com/contributor-profile)**
 - Created the project **Storyboard** 
-- Helped in selecting the website's pages. |  
+- Helped in selecting the website's pages.
+- Designed the slides and the ER diagram
 
 ## Contact
 
