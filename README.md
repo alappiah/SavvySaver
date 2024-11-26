@@ -90,12 +90,12 @@ Ensure you have the following installed:
    - Import the `savvy_saver.sql` file located in the `database/` folder into your MySQL server.
 
 3. Configure the database connection:  
-   - Open `config/db_connect.php` and update the following fields:
+   - Open `db/database.php` and update the following fields:
      ```php
      $host = 'localhost';
-     $dbname = 'savvy_saver';
-     $username = 'your_username';
-     $password = 'your_password';
+     $dbname = ''; (When importing the database it's your chocie)
+     $username = 'root';
+     $password = ''; (No password)
      ```
 
 4. Start the application:  
@@ -152,7 +152,6 @@ SavvySaver/
 
 We’d like to thank the following contributors for their valuable input and effort in building **Savvy Saver**:  
 
-| **Contributor** | **Contribution Description** |  
  **[Thomas Parker](https://github.com/ThomasParkerr)** |
  -  Implemented the frontend and backend for the Dashboard and all its sub-pages, including **Recipe Recommendations**, **Daily Tips**, **Notifications**, **Food Inventory**, **Recipes**, and **Tasks**.
  - Designed and implemented the backend for the homepage. Developed functionalities for adding food items, recipes, and tasks,
