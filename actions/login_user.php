@@ -45,6 +45,7 @@ if (isset($_POST['login'])) {
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['first_name'] = $user['fname'];
             $_SESSION['last_name'] = $user['lname'];
+            $_SESSION['email'] = $email;
 
             header("Location:  ../view/Real_Homepage.php"); // For admin
            

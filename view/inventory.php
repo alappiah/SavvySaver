@@ -110,7 +110,7 @@ $stmt->close();
             
             <!-- Food Item Creation Form (hidden by default) -->
             <div id="create-item-form" style="display: none;">
-                <form action="" method="POST">
+                <form action="../functions/email_notifications.php" method="POST">
                     <label for="item-name">Item Name:</label>
                     <input type="text" id="item-name" name="item-name" required>
 

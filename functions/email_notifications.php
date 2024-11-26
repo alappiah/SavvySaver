@@ -1,8 +1,7 @@
 <?php
 require '../db/database.php';
-require '../vendor/PHPMailer.php';
-require '../vendor/SMTP.php';
-require '../vendor/Exception.php';
+require '../vendor/autoload.php';
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -86,11 +85,18 @@ try {
     $mail->AltBody = strip_tags(str_replace('</li>', "\n", str_replace('<li>', "- ", $emailBody)));
 
     $mail->send();
-    echo "<script>alert('Notification sent successfully!');</script>";
+    echo "<script>
+            alert('Notification sent successfully!');
+            window.location.href = '../view/inventory.php';
+        </script>";
 } catch (Exception $e) {
-    echo "<script>alert('Mailer Error: {$mail->ErrorInfo}');</script>";
+    echo "<script>
+            alert('Mailer Error: " . addslashes($mail->ErrorInfo) . "');
+            window.location.href = '../view/inventory.php';
+        </script>";
 }
 
 $stmt->close();
 $conn->close();
+
 ?>
