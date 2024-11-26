@@ -1,10 +1,5 @@
 <?php
-$mysqli = new mysqli('localhost', 'root', '', 'savvy');
-
-// Check connection
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
-}
+include('../db/database.php');
 
 // Start session to handle logged-in user
 session_start();
