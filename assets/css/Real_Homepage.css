@@ -1,432 +1,563 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* Fonts */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(45deg, #87CEEB, #ccc);
-  color: #000;
-  font-size: 15px;
-  line-height: 1.5;
+  font-family: 'Open Sans';
 }
 
-a {
-  color: #262626;
+h1, h2, h3, h4, h5, h6, p, span, a, label, input {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Font Weights */
+body {
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+/* Colors */
+:root {
+  --white: #FFF;
+  --black: #000;
+  --text-primary: #5F6876;
+  --text-secondary: #C0C3C9;
+}
+
+/* PX to REM Function (Assumes 16px as the base size) */
+:root {
+  --default-browser-font-size: 16px;
+}
+
+@function rem($pixels) {
+  return $pixels / 16 * 1rem;
+}
+
+/* Base */
+body {
+  background: linear-gradient(45deg, #87CEEB, #ccc);
+  color: var(--text-secondary);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.75rem; /* equivalent to rem(12px) */
+  font-weight: 400;
+  line-height: 1rem; /* equivalent to rem(14px) */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dashboard */
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background: var(--white);
+  width: 64rem; /* equivalent to rem(1024px) */
+  height: 42.5rem; /* equivalent to rem(680px) */
+  border-radius: 0.4375rem; /* equivalent to rem(7px) */
+  box-shadow: 1.375rem 2rem 2.125rem rgba(var(--black), 0.06);
+  overflow: hidden;
+}
+
+.dashboard-sidebar {
+  flex-basis: 14rem; /* equivalent to rem(225px) */
+  width: 14rem; /* equivalent to rem(225px) */
+  min-width: 14rem; /* equivalent to rem(225px) */
+  border-right: 0.0625rem solid #F2F2F2; /* equivalent to rem(1px) */
+}
+
+.dashboard-sidebar__brand {
+  margin: 0 0 1.4375rem;
+  padding: 1.4375rem 1.625rem; /* equivalent to rem(23px) rem(26px) */
+}
+
+/* Dashboard Nav */
+.dashboard-nav__item {
+  background: 0;
+}
+
+.dashboard-nav__item a {
+  display: block;
+  padding: 1.3125rem 2.25rem; /* equivalent to rem(21px) rem(36px) */
+  color: inherit;
   text-decoration: none;
 }
 
-ul {
-  list-style: none;
+.dashboard-nav__item--selected {
+  background: #F5F7F7;
+  color: var(--text-primary);
 }
 
-.container {
-  width: 90%;
-  max-width: 1100px;
-  margin: auto;
+/* Dashboard Content */
+.dashboard-content {
+  width: 100%;
+  border-right: 0.0625rem solid #F2F2F2;
+  overflow-y: auto; /* equivalent to rem(1px) */
 }
 
-/* Nav */
-.main-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-  padding: 20px 0;
-  font-size: 13px;
-}
-
-.main-nav .logo {
-  height: 40px; /* Adjust to make it small enough */
-  width: auto; /* Maintain aspect ratio */
-  margin-right: 15px; /* Space between logo and menu */
-}
-
-
-.main-nav ul {
-  display: flex;
-}
-
-.main-nav ul li {
-  padding: 0 10px;
-}
-
-.main-nav ul li a {
-  padding-bottom: 2px;
-}
-
-.main-nav ul li a:hover {
-  border-bottom: 2px solid #262626;
-}
-
-.main-nav ul.main-menu {
-  flex: 1;
-  margin-left: 20px;
-}
-
-.menu-btn {
-  cursor: pointer;
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  z-index: 2;
+/* Dashboard Panel */
+.dashboard-content__panel {
   display: none;
 }
 
-.btn {
+.dashboard-content__panel--active {
+  display: block;
+}
+
+/* Dashboard List */
+.dashboard-list__item {
+  padding: 2.0625rem 2.5625rem; /* equivalent to rem(33px) rem(41px) */
+  border-bottom: 0.0625rem solid #F2F2F2; /* equivalent to rem(1px) */
   cursor: pointer;
+}
+
+.dashboard-list__item h2 {
+  margin: 0 0 1.6875rem; /* equivalent to rem(27px) */
+  color: var(--text-primary);
+  letter-spacing: 0.15rem; /* equivalent to rem(2.4px) */
+}
+
+.dashboard-list__item span {
+  display: block;
+  margin: 0 0 1.5rem; /* equivalent to rem(24px) */
+  font-size: 0.625rem; /* equivalent to rem(10px) */
+  letter-spacing: 0.13625rem; /* equivalent to rem(2.18px) */
+}
+
+.dashboard-list__item--active {
+  background: #F5F7F7;
+}
+
+.dashboard-list__avatar {
   display: inline-block;
-  border: 0;
-  font-weight: bold;
-  padding: 10px 20px;
-  background: #262626;
-  color: #fff;
-  font-size: 15px;
-}
-
-.btn:hover {
-  opacity: 0.9;
-}
-
-.dark {
-  color: #fff;
-}
-
-.dark .btn {
-  background: #f4f4f4;
-  color: #333;
-}
-
-.showcase {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 20px 0;
-  background-color: #f9f9f9;
-  margin-bottom: 30px;
-}
-
-
-
-.box-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  width: 100%;
-  max-width: 800px;
-  margin-bottom: 10px;
-}
-
-.box {
-  flex: 1;
-  aspect-ratio: 1;
-  background-color: #ddd;
-  border: 2px solid #ccc;
-  border-radius: 8px;
+  max-width: 1.9375rem; /* equivalent to rem(31px) */
+  max-height: 1.9375rem; /* equivalent to rem(31px) */
+  border-radius: 100%;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0 0.6875rem 0 0; /* equivalent to rem(11px) */
 }
 
-.box img {
+/* Dashboard Header */
+.dashboard-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-height: 3.6875rem; /* equivalent to rem(59px) */
+  border-bottom: 0.0625rem solid #F2F2F2; /* equivalent to rem(1px) */
+}
+
+.dashboard-header__search {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border-right: 0.0625rem solid #F2F2F2; /* equivalent to rem(1px) */
 }
 
-.background-img {
+.dashboard-header__search input {
+  outline: none;
+  display: block;
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
+  padding: 1.4375rem; /* equivalent to rem(23px) */
+  border: 0;
+  letter-spacing: 0.125rem; /* equivalent to rem(2px) */
 }
 
-.showcase h2 {
-  margin-top: 5px;
-  margin-bottom: 10px;
-  font-size: 2rem;
+.dashboard-header__new {
+  min-width: 3.75rem; /* equivalent to rem(60px) */
+  padding: 1.4375rem; /* equivalent to rem(23px) */
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
-.showcase .btn {
-  margin-top: 30px;
-}
-
-/* Home cards */
-.home-cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
-  margin-bottom: 40px;
-}
-
-.home-cards div {
-  padding: 15px; /* Added padding for inner spacing */
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.home-cards img {
-  width: 80%;
-  margin-bottom: 20px;
-  border-radius: 50%;
-}
-
-.home-cards h3 {
-  margin-bottom: 10px;
-}
-
-.home-cards a {
-  display: inline-block;
-  padding-top: 10px;
-  color: #0067b8;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.home-cards a:hover i {
-  margin-left: 10px;
-}
-
-/* Xbox */
-.xbox {
+/* Dashboard Preview */
+.dashboard-preview {
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_background.jpg') no-repeat;
+  background-size: cover;
   width: 100%;
-  height: 350px;
-  margin-bottom: 20px;
+  height: 100%;
 }
 
-.xbox .content {
-  width: 40%;
-  padding: 50px 0 0 30px;
-}
-
-.xbox p, .carbon p {
-  margin: 10px 0 20px;
-}
-
-/* Carbon */
-.carbon {
-  width: 100%;
-  height: 350px;
-}
-
-.carbon .content {
-  width: 55%;
-  padding: 100px 0 0 30px;
-}
-
-/* Follow */
-.follow {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 30px 0 30px;
-}
-
-.follow * {
-  margin-right: 10px;
-}
-
-/* Links */
-.links {
-  background: #f2f2f2;
-  color: #616161;
-  font-size: 12px;
-  padding: 35px 0;
-}
-
-.links-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-gap: 10px;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.links li {
-  line-height: 2.8;
-}
-
-/* Footer */
-.footer {
-  background: #f2f2f2;
-  color: #616161;
-  font-size: 12px;
-  padding: 20px 0;
-  width: 100%;
-}
-
-.footer-inner {
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.footer div {
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.footer div i {
-  margin-right: 10px;
-}
-
-.footer ul {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.footer li {
-  margin-right: 30px;
-  margin-bottom: 20px;
-}
-
-.main-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-  padding: 20px 0;
-  font-size: 13px;
-}
-
-.main-menu {
-  display: flex;
-  flex-grow: 1; /* Allow the menu to grow and push the auth buttons to the right */
-  justify-content: flex-start;
-}
-
-.auth-buttons .btn i {
-  margin-right: 5px;
-}
-
-.auth-buttons .btn:hover {
-  background-color: #b7c035; /* Hover effect color */
-  box-shadow: 0 0 5px #ffcc00;
-}
-
-#notification-box {
+.dashboard-preview__panel {
   display: none;
+}
+
+.dashboard-preview__panel--active {
+  display: block;
+}
+
+.dashboard-preview__header {
+  margin: 0 0 9.5rem; /* equivalent to rem(152px) */
+  padding: 1.6875rem 1.8125rem; /* equivalent to rem(27px) rem(29px) */
+  color: var(--white);
+}
+
+.dashboard-preview__header h2 {
+  font-size: 0.875rem; /* equivalent to rem(14px) */
+  line-height: 1.0625rem; /* equivalent to rem(17px) */
+}
+
+.dashboard-preview__header h3 {
+  font-size: 2.25rem; /* equivalent to rem(36px) */
+  line-height: 2.875rem; /* equivalent to rem(46px) */
+}
+
+.dashboard-preview__header h3 span {
+  font-size: 1rem; /* equivalent to rem(16px) */
+  line-height: 2.25rem; /* equivalent to rem(36px) */
+  vertical-align: top;
+}
+
+.dashboard-preview__content {
+  padding: 0 2.75rem; /* equivalent to rem(44px) */
+}
+
+.dashboard-preview__content section {
+  padding: 2.0625rem 0; /* equivalent to rem(33px) */
+  border-bottom: 1px solid #F2F2F2;
+}
+
+.dashboard-preview__content section:last-child {
+  border: 0;
+}
+
+.dashboard-preview__content h2 {
+  color: var(--text-primary);
+  letter-spacing: 0.1375rem; /* equivalent to rem(2.2px) */
+}
+
+.dashboard-preview__content h2 span {
+  color: var(--text-secondary);
+  font-size: 0.625rem; /* equivalent to rem(10px) */
+}
+
+.dashboard-preview__content label {
+  display: block;
+  margin: 1.0625rem 0 0 0; /* equivalent to rem(17px) */
+  color: var(--text-primary);
+}
+
+.dashboard-preview__content label:first-child {
+  margin: 2.5rem 0 0 0; /* equivalent to rem(40px) */
+}
+
+.dashboard-preview__content label input {
+  margin: 0 1.4375rem 0 0; /* equivalent to rem(23px) */
+}
+
+.dashboard-preview__content label input:checked ~ span {
+  color: var(--text-secondary);
+  text-decoration: line-through;
+}
+
+/* Add Media Queries for Responsiveness */
+
+/* For smaller screens, such as tablets and phones */
+@media (max-width: 1024px) {
+  .dashboard {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .dashboard-sidebar {
+    width: 100%;
+    min-width: 100%;
+    border-bottom: 1px solid #F2F2F2;
+  }
+
+  .dashboard-content {
+    width: 100%;
+    border-right: none;
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    flex-basis: 12rem;
+    padding: 1rem;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    max-height: auto;
+  }
+
+  .dashboard-header__new {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .dashboard-preview__header h2,
+  .dashboard-preview__header h3 {
+    font-size: 1rem;
+  }
+}
+
+/* Demo */
+.dashboard {
   position: absolute;
-  top: 60px;
-  right: 20px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 15px;
-  border-radius: 5px;
-  width: 250px;
-  z-index: 100;
+  left: 50%;
+  margin: 6.25rem; /* equivalent to rem(100px) */
+  transform: translate(-50%, 0%);
+}
+/* Task Form */
+form {
+  margin: 20px 0;
 }
 
-#notification-box ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#notification-box ul li {
-  margin: 10px 0;
-}
-
-#notification-box .view-all {
-  text-align: center;
-  margin-top: 10px;
-}
-
-#notification-box .view-all a {
-  color: #007BFF;
-  text-decoration: none;
+form label {
+  display: block;
+  margin-bottom: 8px;
   font-weight: bold;
 }
 
-/* Media Queries */
-@media (max-width: 700px) {
-  .menu-btn {
-    display: block;
+form input, form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Button Styling */
+form button {
+  padding: 10px 20px;
+  background-color: #4c75af;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #456fa0;
+}
+
+/* Create Task Button Container */
+.create-task {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  margin-top: 2rem; /* Add some spacing above the button */
+}
+
+/* Create Task Button */
+#create-task-btn {
+  padding: 12px 24px; /* Adequate padding for easy clicking */
+  background-color: #23a1af; /* Primary blue-green color */
+  color: var(--white); /* White text */
+  font-size: 1rem; /* Font size */
+  font-weight: 700; /* Bold text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Hover Effect */
+#create-task-btn:hover {
+  background-color: #0a545c; /* Darker background on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Active (Clicked) Effect */
+#create-task-btn:active {
+  background-color: #23a1af; /* Slightly darker when clicked */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+}
+
+/* Focus Effect for Accessibility */
+#create-task-btn:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #23a1af; /* Match the button's background */
+  box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.5); /* Custom focus outline */
+}
+
+/* Accessible Focus State */
+#create-task-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.5); /* Visible outline when focused */
+}
+
+/* Create Recipe Button */
+#create-recipe-btn {
+  padding: 12px 24px; /* Adequate padding for easy clicking */
+  background-color: #23a1af; /* Primary red-orange color */
+  color: var(--white); /* White text */
+  font-size: 1rem; /* Font size */
+  font-weight: 700; /* Bold text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Hover Effect */
+#create-recipe-btn:hover {
+  background-color: #0a545c; /* Darker background on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Active (Clicked) Effect */
+#create-recipe-btn:active {
+  background-color: #23a1af; /* Slightly darker when clicked */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+}
+
+/* Focus Effect for Accessibility */
+#create-recipe-btn:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #23a1af; /* Match the button's background */
+  box-shadow: 0 0 0 3px rgba(51, 197, 255, 0.5); /* Custom focus outline */
+}
+
+/* Accessible Focus State */
+#create-recipe-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(51, 197, 255, 0.5); /* Visible outline when focused */
+}
+
+/* Create Item Button */
+#create-item-btn {
+  padding: 12px 24px; /* Adequate padding for easy clicking */
+  background-color: #23a1af; /* Primary blue-green color */
+  color: var(--white); /* White text */
+  font-size: 1rem; /* Font size */
+  font-weight: 700; /* Bold text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Hover Effect */
+#create-item-btn:hover {
+  background-color: #0a545c; /* Darker background on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Active (Clicked) Effect */
+#create-item-btn:active {
+  background-color: #23a1af; /* Slightly darker when clicked */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+}
+
+/* Focus Effect for Accessibility */
+#create-item-btn:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #23a1af; /* Match the button's background */
+  box-shadow: 0 0 0 3px rgba(51, 197, 255, 0.5); /* Custom focus outline */
+}
+
+/* Accessible Focus State */
+#create-item-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(51, 197, 255, 0.5); /* Visible outline when focused */
+}
+
+/* Edit Button Styling */
+.edit-recipe-btn {
+  background-color: #4c81af; /* Green background */
+  color: white; /* White text color */
+  padding: 8px 15px; /* Padding for size */
+  font-size: 16px; /* Font size for text */
+  border: none; /* No border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor when hovering */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transition effect for smooth hover and click */
+  margin-left: 10px; /* Space between the delete button and edit button */
+}
+
+/* Hover effect */
+.edit-recipe-btn:hover {
+  background-color: #4577a0; /* Darker green on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Focus effect */
+.edit-recipe-btn:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 3px rgba(0, 102, 127, 0.5); /* Green outline on focus */
+}
+
+/* Disabled button style */
+.edit-recipe-btn:disabled {
+  background-color: #ccc; /* Light grey for disabled */
+  cursor: not-allowed; /* Change cursor to indicate button is disabled */
+}
+
+.edit-item-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-item-btn:hover {
+  background-color: #2980b9;
+}
+
+.edit-item-btn:focus {
+  outline: none;
+}
+
+/* Delete Button Styling */
+.delete-item-btn {
+  background-color: #2bb1c0;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-item-btn:hover {
+  background-color: #2bb1c0;
+}
+
+.delete-item-btn:focus {
+  outline: none;
+}
+
+/* Responsive Styles */
+
+/* For smaller screens, such as tablets and phones */
+@media (max-width: 1024px) {
+  .create-task, .create-recipe, .create-item {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
   }
 
-  .menu-btn:hover {
-    opacity: 0.5;
+  .create-task button, .create-recipe-btn, .create-item-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 
-  .main-nav ul.right-menu {
-    margin-right: 50px;
-  }
-
-  .main-nav ul.main-menu {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #f2f2f2;
-    width: 50%;
-    height: 100%;
-    border-right: #ccc 1px solid;
-    opacity: 0.9;
-    padding: 30px;
-    transform: translateX(-500px);
-    transition: transform 0.5s ease-in-out;
-  }
-
-  .main-nav ul.main-menu li {
-    padding: 10px;
-    border-bottom: #ccc solid 1px;
-    font-size: 14px;
-  }
-
-  .main-nav ul.main-menu li:last-child {
-    border-bottom: 0;
-  }
-
-  .main-nav ul.main-menu.show {
-    transform: translateX(-20px);
-  }
-
-  .home-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .xbox .content p {
-    display: none;
-  }
-
-  .xbox .content h2 {
-    margin-bottom: 20px;
-  }
-
-  .carbon .content {
-    width: 85%;
-  }
-
-  .links .links-inner {
-    grid-template-columns: repeat(2, 1fr);
+  .edit-recipe-btn, .edit-item-btn, .delete-item-btn {
+    font-size: 0.875rem;
+    padding: 6px 12px;
   }
 }
 
-@media (max-width: 500px) {
-  .home-cards {
-    grid-template-columns: 1fr;
+/* For mobile screens */
+@media (max-width: 768px) {
+  .create-task button, .create-recipe-btn, .create-item-btn {
+    padding: 8px 16px;
+    font-size: 0.875rem;
   }
 
-  .links .links-inner {
-    grid-template-columns: 1fr;
-  }
-
-  .links .links-inner ul {
-    margin-bottom: 20px;
+  .edit-recipe-btn, .edit-item-btn, .delete-item-btn {
+    font-size: 0.75rem;
+    padding: 5px 10px;
   }
 }
+
