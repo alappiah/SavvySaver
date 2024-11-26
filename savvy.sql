@@ -1,11 +1,13 @@
-CREATE TABLE team_project_users(
+CREATE TABLE team_project_users( 
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     fName VARCHAR(50) NOT NULL,
     lName VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    email_notifications TINYINT(1) DEFAULT 1
 );
+
 
 -- Create the 'food_items' table
 CREATE TABLE team_project_food_items (
