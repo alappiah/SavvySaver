@@ -4,18 +4,57 @@ include('../db/database.php'); // Adjust the path as needed
 
 // Start session to handle logged-in user
 session_start();
-$user_id = $_SESSION['user_id']; // Replace with your session variable for the user, for example $_SESSION['user_id']
+$user_id = $_SESSION['user_id']; // Replace with your session variable for the user
 
-// Fetch the list of food items for the logged-in user
-$query = "SELECT * FROM team_project_food_items WHERE user_id = ? ORDER BY added_on DESC";
+// Initialize the search term from GET request
+$search_query = isset($_GET['search']) ? $_GET['search'] : '';  // Use GET for search
+
+// Prepare the search query with a LIKE condition for both item name and expiration date
+$query = "SELECT * FROM team_project_food_items WHERE user_id = ? AND (item_name LIKE ? OR expiration_date LIKE ?) ORDER BY added_on DESC";
 $stmt = $conn->prepare($query);
-$stmt->bind_param("i", $user_id); // Bind the user_id as an integer
+
+// Add wildcards for LIKE search
+$search_term = "%$search_query%"; 
+
+// Bind the parameters for the prepared statement
+$stmt->bind_param("iss", $user_id, $search_term, $search_term);
 $stmt->execute();
 $result = $stmt->get_result(); // Get the result set
-$food_items = $result->fetch_all(MYSQLI_ASSOC); // Fetch all rows as an associative array
+$food_items = $result->fetch_all(MYSQLI_ASSOC);
 
-// Close statement
-$stmt->close();
+// Handle Delete action
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_food_item_id'])) {
+    $food_item_id = $_POST['delete_food_item_id'];
+
+    $query = "DELETE FROM team_project_food_items WHERE item_id = ?";  // Corrected column name
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $food_item_id); // Bind the item_id
+    $stmt->execute();
+    $stmt->close();
+
+    // Redirect to the inventory page or show success message
+    header("Location: inventory.php");
+    exit();
+}
+
+// Handle Edit action
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_food_item_id'])) {
+    $food_item_id = $_POST['edit_food_item_id'];
+    $item_name = $_POST['item-name'];
+    $expiration_date = $_POST['expiration-date'];
+    $quantity = $_POST['quantity'];
+
+    // Update the food item in the database
+    $query = "UPDATE team_project_food_items SET item_name = ?, expiration_date = ?, quantity = ? WHERE item_id = ?";  // Corrected column name
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ssii", $item_name, $expiration_date, $quantity, $food_item_id);
+    $stmt->execute();
+    $stmt->close();
+
+    // Redirect to the inventory page or show success message
+    header("Location: inventory.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,27 +91,30 @@ $stmt->close();
         <div class="dashboard-content">
             <!-- Dashboard Header -->
             <div class="dashboard-header">
-                <!-- Search Input -->
-                <div class="dashboard-header__search">
-                    <input type="search" placeholder="Search...">
-                </div>
-                <!-- New Plan Icon -->
-                <div class="dashboard-header__new">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_new_plan.svg" alt="New Plan">
-                </div>
+                <!-- Search Input Form -->
+                <form method="GET" action="">
+                    <div class="dashboard-header__search">
+                        <input type="search" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search_query); ?>">
+                    </div>
+                </form>
             </div>
 
             <!-- Dashboard Content Panels -->
             <div class="dashboard-content__panel dashboard-content__panel--active" data-panel-id="tasks">
                 <div class="dashboard-list">
-                    <!-- Display Food Items -->
-                    <?php foreach ($food_items as $item): ?>
-                        <div class="dashboard-list__item">
-                            <h2><?php echo htmlspecialchars($item['item_name']); ?></h2>
-                            <span>Expiration Date: <?php echo htmlspecialchars($item['expiration_date']); ?></span>
-                            <span>Quantity: <?php echo htmlspecialchars($item['quantity']); ?></span>
-                        </div>
-                    <?php endforeach; ?>
+                    <!-- Check if there are no items -->
+                    <?php if (empty($food_items)): ?>
+                        <p>No food items found matching your search.</p>
+                    <?php else: ?>
+                        <!-- Display Food Items -->
+                        <?php foreach ($food_items as $item): ?>
+                            <div class="dashboard-list__item">
+                                <h2><?php echo htmlspecialchars($item['item_name']); ?></h2>
+                                <span>Expiration Date: <?php echo htmlspecialchars($item['expiration_date']); ?></span>
+                                <span>Quantity: <?php echo htmlspecialchars($item['quantity']); ?></span>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -80,7 +122,7 @@ $stmt->close();
             <div class="create-task">
                 <button id="create-item-btn">Add Food Item</button>
             </div>
-            
+
             <!-- Food Item Creation Form (hidden by default) -->
             <div id="create-item-form" style="display: none;">
                 <form action="../functions/email_notifications.php" method="POST">
@@ -96,11 +138,6 @@ $stmt->close();
                     <button type="submit">Add Item</button>
                 </form>
             </div>
-
-            <!-- Display success or error message -->
-            <?php if (isset($message)): ?>
-                <div class="message"><?php echo $message; ?></div>
-            <?php endif; ?>
         </div>
     </div>
 
