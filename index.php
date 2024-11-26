@@ -19,18 +19,8 @@
 
       <ul class="main-menu">
         <li><a href="index.php">Home</a></li>
-        <li><a href="#">Contact</a></li>
         <li><a href="#">Settings</a></li>
       </ul>
-
-      <ul class="right-menu">
-        <li>
-            <a href="#"><i class="fas fa-search"></i></a>
-        </li>
-        <li>
-            <a href="#"><i class="fas fa-shopping-cart"></i></a>
-        </li>
-    </ul>
 
     <div class="auth-buttons">
         <a href="view/login.php" class="btn-login">
@@ -58,7 +48,7 @@
   <div class="showcase-text">
     <h2>SAVVY SAVER</h2>
     <p>Minimize Waste, Maximize Taste.</p>
-    <a href="#" class="btn">Get Started <i class="fas fa-chevron-right"></i></a>
+    <a href="view/register.php" class="btn">Get Started <i class="fas fa-chevron-right"></i></a>
   </div>
 </header>
 
@@ -70,7 +60,7 @@
         <p>
           Keep your food fresh longer with sustainable, reusable storage solutions.
         </p>
-        <a href="view/login.php">Learn More <i class="fas fa-chevron-right"></i></a>
+        <a href="view/register.php">Learn More <i class="fas fa-chevron-right"></i></a>
       </div>
       <div>
         <i class="fas fa-lightbulb fa-3x"></i>
@@ -78,7 +68,7 @@
         <p>
           Reduce food spoilage with our energy-efficient fridges designed to keep track of expiry dates.
         </p>
-        <a href="view/login.php">Learn More <i class="fas fa-chevron-right"></i></a>
+        <a href="view/register.php">Learn More <i class="fas fa-chevron-right"></i></a>
       </div>
       <div>
         <i class="fas fa-utensils fa-3x"></i>
@@ -86,7 +76,7 @@
         <p>
           Turn food scraps into valuable compost to nourish your garden.
         </p>
-        <a href="view/login.php">Learn More <i class="fas fa-chevron-right"></i></a>
+        <a href="view/register.php">Learn More <i class="fas fa-chevron-right"></i></a>
       </div>
       <div>
         <i class="fas fa-bell fa-3x"></i>
@@ -94,7 +84,7 @@
         <p>
           Track your food inventory and receive alerts for items approaching their expiration date.
         </p>
-        <a href="view/login.php">Learn More <i class="fas fa-chevron-right"></i></a>
+        <a href="view/register.php">Learn More <i class="fas fa-chevron-right"></i></a>
       </div>
     </section>
 
