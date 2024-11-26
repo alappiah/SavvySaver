@@ -6,33 +6,6 @@ include('../db/database.php'); // Adjust the path as needed
 session_start();
 $user_id = $_SESSION['user_id']; // Replace with your session variable for the user, for example $_SESSION['user_id']
 
-// Handle form submission for adding a new food item
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve form data
-    $item_name = $_POST['item-name'];
-    $expiration_date = $_POST['expiration-date'];
-    $quantity = $_POST['quantity'];
-
-    // Prepare the SQL query to insert data into the database using mysqli
-    $query = "INSERT INTO team_project_food_items (user_id, item_name, expiration_date, quantity, added_on) 
-              VALUES (?, ?, ?, ?, NOW())";
-    
-    // Prepare statement
-    $stmt = $conn->prepare($query);
-    
-    // Bind parameters
-    $stmt->bind_param("issi", $user_id, $item_name, $expiration_date, $quantity);
-
-    // Execute the query and check if the insertion was successful
-    if ($stmt->execute()) {
-        $message = "Food item added successfully!";
-    } else {
-        $message = "Error adding food item. Please try again.";
-    }
-    // Close statement
-    $stmt->close();
-}
-
 // Fetch the list of food items for the logged-in user
 $query = "SELECT * FROM team_project_food_items WHERE user_id = ? ORDER BY added_on DESC";
 $stmt = $conn->prepare($query);
