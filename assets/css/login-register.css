@@ -267,32 +267,40 @@ form .error-message{
 @media (max-width: 480px) {
     .container {
         flex-direction: column;
-        height: auto; /* Adjust height for stacking */
-        width: 90%; /* Adjust width for smaller screens */
+        width: 90%; /* Adjusted for smaller screens */
+        height: auto;
     }
 
     .login-container,
     .toggle-container {
-        width: 100%; /* Take full width on mobile */
-        height: auto; /* Adjust height */
+        width: 100%; /* Full-width for mobile */
     }
 
     .login-container {
-        order: 1; /* Place login on top */
+        order: 1; /* Ensure login is on top */
     }
 
     .toggle-container {
-        order: 2; /* Place welcome message below */
-    }
-
-    .welcome-container {
-        padding: 20px; /* Add padding for better readability */
+        order: 2; /* Welcome message below */
     }
 
     .login-container form input[type="email"],
-    .login-container form input[type="password"],
-    .login-container form button {
-        width: 90%; /* Make inputs/buttons more compact */
+    .login-container form input[type="password"] {
+        width: 90%; /* Compact inputs */
+    }
+
+    .login-container form button,
+    .welcome-container button {
+        width: 90%; /* Full-width buttons */
+        max-width: 200px;
+    }
+
+    .welcome-container h1 {
+        font-size: 20px;
+    }
+
+    .welcome-container p {
+        font-size: 14px;
     }
 }
 
@@ -332,5 +340,79 @@ form .error-message{
     .login-container form input[type="password"] {
         width: 85%;
         max-width: 300px;
+    }
+}
+/* Small Devices: Phones */
+@media (max-width: 480px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        width: 90%;
+    }
+
+    .sign-in-container,
+    .sign-up-container {
+        width: 100%;
+    }
+
+    .sign-in-container {
+        order: 2;
+    }
+
+    .sign-up-container {
+        order: 1;
+    }
+
+    input,
+    button {
+        width: 90%; /* Make inputs and buttons more compact */
+    }
+
+    .sign-in-container h1,
+    .sign-up-container h1 {
+        font-size: 20px;
+    }
+}
+
+/* Medium Devices: Tablets */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+    }
+
+    .sign-in-container,
+    .sign-up-container {
+        width: 100%;
+    }
+
+    .sign-in-container h1,
+    .sign-up-container h1 {
+        font-size: 22px;
+    }
+
+    input,
+    button {
+        width: 80%; /* Adjust input and button size */
+    }
+}
+
+/* Large Devices: Laptops */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: row;
+        width: 80%;
+        height: auto;
+    }
+
+    .sign-in-container h1,
+    .sign-up-container h1 {
+        font-size: 24px;
+    }
+
+    input,
+    button {
+        width: 85%; /* Adjust width for larger screens */
     }
 }
