@@ -166,8 +166,7 @@ We’d like to thank the following contributors for their valuable input and eff
 - Implemented the **Email Notification** feature. 
 - Developed backend logic for **User Feedback**, **Profile Updates**, and **Password Change Feature**.
 - Design backend logic for **forgotten password**
-- Implement backend for **settings**. Ability to change first name, last name, email and password. Design a backend for whether the user want to receive email notifications or not. Designed backend to save user feedback
-- Implement logout feature
+- Implemented **logout** feature
 
 **[Elizabeth Avevor](https://github.com/Afful-yayra156)** 
 - Created the project **Storyboard** 
