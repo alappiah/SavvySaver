@@ -86,6 +86,14 @@ CREATE TABLE team_project_tasks (
     FOREIGN KEY (user_id) REFERENCES team_project_users(user_id) ON DELETE CASCADE  -- Link to users table
 );
 
+CREATE TABLE team_project_password_reset_tokens (
+    user_id INT NOT NULL,
+    token VARCHAR(64) NOT NULL,
+    expires_at DATETIME NOT NULL,
+    PRIMARY KEY (user_id),
+    FOREIGN KEY (user_id) REFERENCES team_project_users(user_id) ON DELETE CASCADE
+);
+
 INSERT INTO team_project_users (fName, lName, email, password) VALUES
 ('Kwame', 'Nkrumah', 'kwame@gmail.com', 'kwame1542wes'),
 ('Akosua', 'Agyapadie', 'akosua@gmail.com', 'ahhdrhb345'),
