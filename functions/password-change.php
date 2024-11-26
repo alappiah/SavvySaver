@@ -51,13 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("si", $hashedNewPassword, $userId);
 
         if ($stmt->execute()) {
-            echo "<script>alert('Password updated successfully!'); window.location.href='userProfile.php';</script>";
+            echo "<script>alert('Password updated successfully!'); window.location.href='../view/settings.php';</script>";
         } else {
             echo "<script>alert('Error updating password. Please try again later.'); window.history.back();</script>";
         }
         $stmt->close();
     } else {
-        echo "<script>alert('You are not logged in. Please log in to continue.'); window.location.href='login.php';</script>";
+        echo "<script>alert('You are not logged in. Please log in to continue.'); window.location.href='../view/login.php';</script>";
     }
 }
 
