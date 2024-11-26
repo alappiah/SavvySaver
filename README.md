@@ -153,8 +153,7 @@ SavvySaver/
 We’d like to thank the following contributors for their valuable input and effort in building **Savvy Saver**:  
 
 | **Contributor** | **Contribution Description** |  
-|------------------|-------------------------------|  
-| **[Thomas Parker](https://github.com/ThomasParkerr)** |
+ **[Thomas Parker](https://github.com/ThomasParkerr)** |
  -  Implemented the frontend and backend for the Dashboard and all its sub-pages, including **Recipe Recommendations**, **Daily Tips**, **Notifications**, **Food Inventory**, **Recipes**, and **Tasks**.
  - Designed and implemented the backend for the homepage. Developed functionalities for adding food items, recipes, and tasks,
  - Designed logic for marking tasks as completed.
