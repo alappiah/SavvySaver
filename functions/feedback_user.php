@@ -22,12 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             echo "<script>
                 alert('Thank you for your feedback!');
-                window.location.href = '../view/userProfile.php'; 
+                window.location.href = '../view/settings.php'; 
                 </script>";
         } else {
             echo  "<script>
                     alert('Error saving feedback: " . $stmt->error . "');
-                    window.location.href = '../view/userProfile.php';
+                    window.location.href = '../view/settings.php';
                     </script>";
         }
 
