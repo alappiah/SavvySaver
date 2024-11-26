@@ -21,7 +21,7 @@ $activeTasksResult = $mysqli->query($activeTasksQuery);
 $activeTasks = $activeTasksResult->fetch_assoc()['active_tasks'];
 
 // 3. Count total food inventory items
-$totalInventoryQuery = "SELECT SUM(quantity) AS total_inventory FROM team_project_food_items";
+$totalInventoryQuery = "SELECT COUNT(*)  AS total_inventory FROM team_project_food_items";
 $totalInventoryResult = $mysqli->query($totalInventoryQuery);
 $totalInventory = $totalInventoryResult->fetch_assoc()['total_inventory'];
 
