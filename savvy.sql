@@ -121,42 +121,6 @@ INSERT INTO team_project_recipes (recipe_name, instructions) VALUES
 ('Palava Sauce', 'Cook vegetables and serve with boiled plantains.'),
 ('Light Soup', 'Make a soup from fish and spices, served with fufu.');
 
--- Insert sample data into 'recipe_ingredients'
-INSERT INTO team_project_recipe_ingredients (recipe_id, ingredient_name) VALUES
-(1, 'Rice'),
-(1, 'Tomatoes'),
-(1, 'Onions'),
-(1, 'Vegetable Oil'),
-(1, 'Garlic'),
-(2, 'Ripe Plantains'),
-(2, 'Ginger'),
-(2, 'Chili Powder'),
-(2, 'Pepper'),
-(3, 'Chicken'),
-(3, 'Tomatoes'),
-(3, 'Onions'),
-(3, 'Garlic'),
-(4, 'Tilapia'),
-(4, 'Cornmeal'),
-(4, 'Water'),
-(4, 'Cassava Flour'),
-(5, 'Rice'),
-(5, 'Vegetables'),
-(5, 'Chicken'),
-(6, 'Groundnuts'),
-(6, 'Rice Balls'),
-(7, 'Rice'),
-(7, 'Groundnuts'),
-(8, 'Eggs'),
-(8, 'Tomatoes'),
-(8, 'Chili Powder'),
-(9, 'Spinach'),
-(9, 'Plantains'),
-(9, 'Tomatoes'),
-(10, 'Fish'),
-(10, 'Pepper'),
-(10, 'Tomatoes');
-
 -- Insert sample data into 'daily_tips'
 INSERT INTO team_project_daily_tips (tip_text) VALUES 
 ('Check your fridge weekly to prevent spoilage.'),
