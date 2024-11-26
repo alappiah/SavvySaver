@@ -166,13 +166,13 @@ We’d like to thank the following contributors for their valuable input and eff
 
 **[Elizabeth Avevor](https://github.com/Afful-yayra156)** 
 - Created the project **Storyboard** 
-- Assisted in developing the website's pages. 
+- Assisted in selecting the website's pages. 
 - Updated the frontend for three pages, including the **Settings Page**
 - Improved the **Login** and **Signup** pages. |  
 
 **[Joel Ackam](https://github.com/contributor-profile)**
 - Created the project **Storyboard** 
-- Helped in developing the website's pages. |  
+- Helped in selecting the website's pages. |  
 
 ## Contact
 
