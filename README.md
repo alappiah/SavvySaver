@@ -169,7 +169,8 @@ We’d like to thank the following contributors for their valuable input and eff
 - Created the project **Storyboard** 
 - Assisted in selecting the website's pages. 
 - Updated the frontend for three pages, including the **Settings Page**
-- Improved the **Login** and **Signup** pages. |  
+- Improved the **Login** and **Signup** pages.
+- Designed the Database 
 
 **[Joel Ackam](https://github.com/contributor-profile)**
 - Created the project **Storyboard** 
