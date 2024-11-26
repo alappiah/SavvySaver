@@ -6,10 +6,20 @@ include('../db/database.php'); // Adjust the path as needed
 session_start();
 $user_id = $_SESSION['user_id']; // Replace with your session variable for the user
 
-// Fetch all tasks from the database where is_completed is 0 (not completed)
-$query = "SELECT task_id, task_name, task_description FROM team_project_tasks WHERE user_id = ? AND is_completed = 0 ORDER BY task_name";
+// Initialize the search term
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+// SQL query to fetch tasks based on the search term
+$query = "SELECT task_id, task_name, task_description 
+          FROM team_project_tasks 
+          WHERE user_id = ? AND is_completed = 0 
+          AND (task_name LIKE ? OR task_description LIKE ?)
+          ORDER BY task_name";
 $stmt = $conn->prepare($query);
-$stmt->bind_param("i", $user_id); // "i" denotes that user_id is an integer
+
+// Bind parameters (with % for partial matching in SQL)
+$search_term = "%" . $search . "%"; // Adding % for wildcard search
+$stmt->bind_param("iss", $user_id, $search_term, $search_term); // "i" for integer, "s" for string
 $stmt->execute();
 $result = $stmt->get_result();
 $tasks = $result->fetch_all(MYSQLI_ASSOC);
@@ -57,13 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <!-- Dashboard Navigation -->
             <ul class="dashboard-nav">
-                <li class="dashboard-nav__item"><a href="../view/Real_Homepage.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Home">Home</a></li>
-                <li class="dashboard-nav__item"><a href="../view/daily_tips.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_home.svg" alt="Daily Tips">Daily Tips</a></li>
-                <li class="dashboard-nav__item"><a href="../view/recipe_recommendation.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_home.svg" alt="Recipe Recommendations">Recipe Recommendations</a></li>
-                <li class="dashboard-nav__item"><a href="../view/notifications.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_notifications.svg" alt="Notifications">Notifications</a></li>
-                <li class="dashboard-nav__item"><a href="../view/inventory.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_my_trip.svg" alt="Food Inventory">Food Inventory</a></li>
-                <li class="dashboard-nav__item"><a href="../view/recipes.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Recipes">Recipes</a></li>
-                <li class="dashboard-nav__item"><a href="../view/Tasks.php"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_discover_places.svg" alt="Tasks">Tasks</a></li>
+                <li class="dashboard-nav__item"><a href="../view/Real_Homepage.php">Home</a></li>
+                <li class="dashboard-nav__item"><a href="../view/daily_tips.php">Daily Tips</a></li>
+                <li class="dashboard-nav__item"><a href="../view/recipe_recommendation.php">Recipe Recommendations</a></li>
+                <li class="dashboard-nav__item"><a href="../view/notifications.php">Notifications</a></li>
+                <li class="dashboard-nav__item"><a href="../view/inventory.php">Food Inventory</a></li>
+                <li class="dashboard-nav__item"><a href="../view/recipes.php">Recipes</a></li>
+                <li class="dashboard-nav__item"><a href="../view/Tasks.php">Tasks</a></li>
             </ul>
         </div>
         
@@ -72,12 +82,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <!-- Dashboard Header -->
             <div class="dashboard-header">
                 <div class="dashboard-header__search">
-                    <input type="search" placeholder="Search...">
+                    <!-- Search form with button -->
+                    <form method="GET" action="">
+                        <input type="search" name="search" placeholder="Search tasks..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" class="search-input">
+                    </form>
                 </div>
                 <div class="dashboard-header__new">
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_new_plan.svg" alt="New Plan">
                 </div>
             </div>
+
 
             <!-- Dashboard Content Panels -->
             <div class="dashboard-content__panel dashboard-content__panel--active" data-panel-id="tasks">
@@ -92,8 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="dashboard-list__item dashboard-list__item--placeholder">
-                            <h2>No tasks available</h2>
-                            <span>Start adding your tasks to see them here.</span>
+                            <h2>No tasks found</h2>
+                            <span>Try a different search term or add a new task.</span>
                         </div>
                     <?php endif; ?>
                 </div>
