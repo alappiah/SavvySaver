@@ -1,25 +1,70 @@
+<?php
+session_start(); // Start the session if not already started
+include('../db/database.php'); // Include the database connection
+
+// Check if the user_id session is set
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id']; // Get user ID from session
+
+    // Prepare SQL query to fetch items nearing expiration
+    $sql = "
+    SELECT item_name, expiration_date 
+    FROM team_project_food_items 
+    WHERE user_id = ? 
+      AND expiration_date > CURDATE() 
+      AND expiration_date <= DATE_ADD(CURDATE(), INTERVAL 14 DAY)
+    ORDER BY expiration_date ASC 
+    LIMIT 2
+    ";
+
+    // Prepare the query statement
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId); // Bind the user_id parameter (integer)
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Output the result inside the notification box
+    echo '<div id="notification-box">';
+    if ($result->num_rows > 0) {
+        echo '<ul>';
+        while ($item = $result->fetch_assoc()) {
+            echo "<li>{$item['item_name']} (Expires: {$item['expiration_date']})</li>";
+        }
+        echo '</ul>';
+    } else {
+        echo '<p>No items nearing expiry.</p>';
+    }
+    echo '</div>';
+
+    $stmt->close(); // Close the statement
+} else {
+    echo '<p>User ID not set. Please log in.</p>';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Savvy Saver</title>
-    <style>
-        <?php include '../assets/css/Real_Homepage.css'; ?>
-    </style>
+     <!-- Link to external CSS file -->
+     <link rel="stylesheet" href="../assets/css/Real_Homepage.css">
+    
     <!-- Add Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-  <class="container">
-    <!-- Nav -->
+  <div class="container">
     <nav class="main-nav">
       <img src="../assets/images/savvy3.png" alt="Savvy Saver Logo" class="logo">
 
       <ul class="main-menu">
         <li><a href="Real_Homepage.php">Home</a></li>
-        <li><a href="settings.php">Settings</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="userProfile.php">Profile</a></li>
       </ul>
 
       <ul class="right-menu">
@@ -30,54 +75,6 @@
 </nav>
 
 <div id="notification-box">
-    <?php
-    // Include your database connection file
-    require '../db/database.php';
-
-    // Create a connection using mysqli
-    $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); // Replace with your database constants
-
-    // Check connection
-    if ($mysqli->connect_error) {
-        die("Connection failed: " . $mysqli->connect_error);
-    }
-
-    // Fetch closest expiry items
-    $userId = 1; // Assume user ID is 1 (replace with session user ID)
-    $query = "
-        SELECT item_name, expiration_date 
-        FROM team_project_food_items 
-        WHERE user_id = ? 
-          AND expiration_date > CURDATE() 
-          AND expiration_date <= DATE_ADD(CURDATE(), INTERVAL 14 DAY)
-        ORDER BY expiration_date ASC 
-        LIMIT 2
-    ";
-
-    $stmt = $mysqli->prepare($query);
-    if ($stmt) {
-        $stmt->bind_param("i", $userId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $items = $result->fetch_all(MYSQLI_ASSOC);
-        $stmt->close();
-    } else {
-        echo "<p>Error preparing query: " . $mysqli->error . "</p>";
-        $items = [];
-    }
-
-    $mysqli->close();
-
-    if ($items):
-        echo '<ul>';
-        foreach ($items as $item):
-            echo "<li>{$item['item_name']} (Expires: {$item['expiration_date']})</li>";
-        endforeach;
-        echo '</ul>';
-    else:
-        echo '<p>No items nearing expiry.</p>';
-    endif;
-    ?>
     <div class="view-all">
         <a href="notifications.php">View All</a>
     </div>
