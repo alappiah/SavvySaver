@@ -12,6 +12,7 @@
         <!-- Side Navigation Pane -->
         <nav class="side-nav">
             <h2>Settings</h2>
+            <h3><a href="Real_Homepage.php" id="go-back-home">Go back Home</a></h3>
             <ul>
                 <li><a href="#personal-info" class="active" data-section="personal-info"><i class="fas fa-user"></i> Personal Info</a></li>
                 <li><a href="#notification-settings" data-section="notification-settings"><i class="fas fa-bell"></i> Notifications</a></li>
@@ -80,10 +81,6 @@
                         <label for="confirm-password">Confirm Password</label>
                         <input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm new password">
                         <span id="confirm-password-error" style="color: red;"></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Two-Factor Authentication</label>
-                        <input type="checkbox" id="two-factor-auth"> Enable two-factor authentication
                     </div>
                     <button type="submit" class="save-btn">Save Security Settings</button>
                 </form>
