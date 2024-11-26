@@ -7,21 +7,21 @@ $user_id = $_SESSION['user_id'];
 
 // 1. Count the total number of recipes
 $totalRecipesQuery = "SELECT COUNT(*) AS total_recipes FROM team_project_recipes";
-$totalRecipesResult = $mysqli->query($totalRecipesQuery);
+$totalRecipesResult = $conn->query($totalRecipesQuery);
 $totalRecipes = $totalRecipesResult->fetch_assoc()['total_recipes'];
 
 // 2. Count active (non-completed) tasks
 $activeTasksQuery = "SELECT COUNT(*) AS active_tasks FROM team_project_tasks WHERE is_completed = 0";
-$activeTasksResult = $mysqli->query($activeTasksQuery);
+$activeTasksResult = $conn->query($activeTasksQuery);
 $activeTasks = $activeTasksResult->fetch_assoc()['active_tasks'];
 
 // 3. Count total food inventory items
 $totalInventoryQuery = "SELECT COUNT(*)  AS total_inventory FROM team_project_food_items";
-$totalInventoryResult = $mysqli->query($totalInventoryQuery);
+$totalInventoryResult = $conn->query($totalInventoryQuery);
 $totalInventory = $totalInventoryResult->fetch_assoc()['total_inventory'];
 
 // Close the MySQLi connection
-$mysqli->close();
+$conn->close();
 ?>
 
 <!DOCTYPE html>
